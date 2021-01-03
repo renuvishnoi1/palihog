@@ -48,7 +48,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('customs.index')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Custom Fields               

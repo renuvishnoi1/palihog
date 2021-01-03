@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::resource('/categories', 'CategoryController')->name('*','categories');
-Route::resource('/sub_categories', 'SubCategoryController')->name('*','sub_categories');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard',[App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::resource('/sub_categories', App\Http\Controllers\SubCategoryController::class);
+Route::resource('/categories', App\Http\Controllers\CategoryController::class);

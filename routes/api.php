@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/registration', 'Api\CustomerController@registration')->name('registration');
-Route::post('/login', 'Api\CustomerController@login')->name('login');
-
+Route::post('/registration', [App\Http\Controllers\UserApiController::class,'register']);
+Route::post('/login', [App\Http\Controllers\UserApiController::class,'login']);
+Route::get('/login', [App\Http\Controllers\UserApiController::class,'login'])->name('login');
+Route::middleware('auth:api')->get('/category_list',  [App\Http\Controllers\UserApiController::class,'categoryList']
+);
