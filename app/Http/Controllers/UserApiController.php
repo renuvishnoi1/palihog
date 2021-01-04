@@ -25,6 +25,7 @@ class UserApiController extends Controller
        }
        $input = $request->all();
        $input['password']=bcrypt($input['password']);
+       //$input['remember_token'] = Str::random(10);
        $user= User::create($input);
        $reponseArray=[];
        $reponseArray['token']= $user->createToken('MyApp')->accessToken;

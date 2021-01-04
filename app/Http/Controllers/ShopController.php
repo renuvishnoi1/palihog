@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
- 
- use App\models\Category;
-use DB;
-class CategoryController extends Controller
+
+class ShopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data= Category::all();
-
-        return view('admin.categories.view_category')->with(compact('data'));
+        return view('admin.shops.view_shop');
     }
 
     /**
@@ -27,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.add_category');
+        //
     }
 
     /**
@@ -38,17 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category= new Category();        
-         $this->validate($request,[
-         'category_name'=>'required',
-         
-         ]);
-         $category->category_name= $request['category_name'];
-        $category->status= $request['status'];
-        $category->save();
-         
-          return redirect('/categories')->with('message', 'Category added successfully');
-
+        //
     }
 
     /**
@@ -70,9 +56,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-          //dd($id);
-        $category= Category::find($id);
-        return view('admin.categories.edit_category')->with(compact('category'));
+        //
     }
 
     /**
@@ -84,16 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
-      $category=Category::find($id);
-      $this->validate($request,[
-         'category_name'=>'required',
-         
-         ]);
-       $category->category_name= $request['category_name'];
-        $category->status= $request['status'];
-        $category->save();
-        return redirect('/categories')->with('message', 'Category updated successfully');
+        //
     }
 
     /**
@@ -104,7 +79,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::where('id',$id)->delete();
-         return redirect('/categories');
+        //
     }
 }

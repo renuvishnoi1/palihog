@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SubCategory;
+use App\models\SubCategory;
  use App\models\Category;
 use DB;
 
