@@ -44,6 +44,7 @@ class UserApiController extends Controller
 
     }
     public function categoryList(Request $request){
-    	echo "hi";
+    	echo "hiii";
+
     }
 }
