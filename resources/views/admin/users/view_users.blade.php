@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Sub Category List')
+@section('title', 'User List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Sub Categories</h1>
+            <h1>Users</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -31,29 +31,41 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('sub_categories.create')}}" class="btn btn-success">Add Sub Category</a>
+                <a href="{{ route('users.create')}}" class="btn btn-success">Add User</a>
                 <a href=""></a>
 
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Sub Category</th>
-                    <th>Category</th>
-                    <th>Status</th>                    
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th> 
+                    <th>User/Rider</th>
+                    <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $value)
+                    @foreach($data as $user)
                   <tr>
-                    
-                    <td>{{ $value->sub_category}}</td>
-                    <td>{{ $value->category_name}}</td>
-                    <?php if($value->status =='1'){
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone_number }}</td>
+                    <?php if($user->type =='2'){
+                      $type='User';
+
+                    }elseif($user->type =='3'){
+                      $type='Rider';
+                    }else{
+                      $type='';
+                    }
+                      ?>
+                    <td>{{ $type }}</td>
+                    <?php if($user->status =='1'){
                       $status='Active';
 
                     }else{
@@ -63,13 +75,13 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('sub_categories.destroy', $value->id) }}" method="POST">
+                       <form action="{{ route('users.destroy', $user->id) }}" method="POST">
 
-                       <!--  <a href="{{ route('categories.show', $value->id) }}" title="show">
+                       <!--  <a href="{{ route('users.show', $user->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('sub_categories.edit', $value->id) }}">
+                        <a href="{{ route('users.edit', $user->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -89,9 +101,11 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>Sub Category</th>
-                    <th>Category</th>
-                    <th>Status</th>                    
+                   <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th> 
+                    <th>User/Rider</th>
+                    <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </tfoot>
@@ -111,4 +125,14 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>    @endsection
+  </div>   
+  @stack('scripts')
+ 
+  <script type="text/javascript">
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+  </script>
+  @endstack
+   @endsection

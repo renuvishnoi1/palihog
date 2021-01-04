@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SubCategory;
- use App\Category;
+use App\models\SubCategory;
+ use App\models\Category;
 use DB;
 
 class SubCategoryController extends Controller

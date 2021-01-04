@@ -14,10 +14,10 @@ class UserApiController extends Controller
        $validator= Validator::make($request->all(),[
        	'name'=>'required',
        	'email'=>'required|email|unique:users',
-       	'password'=>'required',
+       	'password'=>'required|min:6',
        	'c_password'=>'required|same:password',
        	'type'=>'required',
-       	'phone_number'=>'required|numeric',
+       	'phone_number'=>'required|numeric|digits:10',
 
        ]);
        if( $validator->fails()){
@@ -25,6 +25,7 @@ class UserApiController extends Controller
        }
        $input = $request->all();
        $input['password']=bcrypt($input['password']);
+       //$input['remember_token'] = Str::random(10);
        $user= User::create($input);
        $reponseArray=[];
        $reponseArray['token']= $user->createToken('MyApp')->accessToken;
