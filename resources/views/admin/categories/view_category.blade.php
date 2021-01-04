@@ -1,4 +1,5 @@
 @extends('admin.master')
+@section('title', 'Category List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

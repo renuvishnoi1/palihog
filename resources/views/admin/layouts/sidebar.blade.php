@@ -32,8 +32,16 @@
            
           </li>
            <li class="nav-item">
+            <a href="{{ route('users.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+               User Management               
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
             <a href="{{ route('categories.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fa fa-list"></i>
               <p>
                Category               
               </p>
@@ -41,7 +49,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('sub_categories.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fa fa-list"></i>
               <p>
                Sub Category               
               </p>

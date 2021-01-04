@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dashboard',[App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::resource('/sub_categories', App\Http\Controllers\SubCategoryController::class);
 Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+Route::resource('/users', App\Http\Controllers\UserManagementController::class);
