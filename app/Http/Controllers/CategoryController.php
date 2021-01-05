@@ -27,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.add_category');
+        $levels=Category::where(['parent_id'=>0])->get();
+        
+        return view('admin.categories.add_category')->with(compact('levels'));
     }
 
     /**
@@ -40,11 +42,32 @@ class CategoryController extends Controller
     {
         $category= new Category();        
          $this->validate($request,[
-         'category_name'=>'required',
+         'name'=>'required',
          
          ]);
-         $category->category_name= $request['category_name'];
-        $category->status= $request['status'];
+         $category->name= $request['name'];
+          $category->parent_id= $request['parent_id'];
+         if(!empty($request['description'])){
+                $category->description=$request['description'];
+            }else{
+                $category->description='';
+            }
+            
+            // upload image
+            if($request->hasfile('image')){
+                echo $img_temp= $request['image'];
+                if($img_temp->isValid()){
+                // image path code
+                $extension = $img_temp->getClientOriginalExtension();
+                $filename= time().'.'.$extension;
+                
+                $request['image']->move(public_path('uploads/categories/'), $filename);
+                
+                $category->image= $filename;
+            }
+            }
+
+       
         $category->save();
          
           return redirect('/categories')->with('message', 'Category added successfully');

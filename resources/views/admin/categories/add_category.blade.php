@@ -37,32 +37,42 @@
             </div>
           </div>
           <!-- /.card-header -->
-           @if ($errors->has('category_name'))
-                    <span class="text-danger">{{ $errors->first('category_name') }}</span>
-                @endif
-         <form action="{{ route('categories.store')}}" method="POST">
+          
+                <div class="panel-body">
+         <form action="{{ route('categories.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-              <div class="col-md-6">
-                 <label>Category Name</label>
-                 <input type="text" name="category_name" class="form-control">                          
-               </div>
-              </div>
-              <div class="form-group">
-              <div class="col-md-6">
-                 <label>Status</label>
-                 <select class="form-control" name="status">
-                   <option value="1">Active</option>
-                   <option value="0">Inactive</option>
-                 </select>
-               </div>
-          </div>
-           <div class="form-group">
-              <div class="col-md-6">
-             <button type="submit" class="btn btn-primary">Submit</button>
-               </div>   
-            </div>
-           </form>
+        <div class="form-group">
+                                 <label>Category Name</label>
+                                 <input type="text" name="name" id="category_name" class="form-control" placeholder="Enter Category Name" required>
+                              </div>
+                              <div class="form-group">
+                                 <label>Parent Category </label>
+                                 <select name="parent_id" id="parent_id" class="form-control">
+
+                                    <option value="0">parent category</option>
+                                    @foreach($levels as $val)
+                                    <option value="{{ $val->id}}">{{ $val->name}}</option>
+
+                                    @endforeach
+                                 </select>
+
+                              </div>
+                              <div class="form-group">
+                                 <label>Image</label>
+                                 <input type="file" name="image" id="image" class="form-control" >
+                              </div>
+                              <div class="form-group">
+                                 <label>Category Description</label>
+                                 <textarea name="description" class="form-control" id="category_description" cols="30" rows="10"></textarea>
+                              </div>
+                              
+                                                            
+                              <div class="reset-button">
+                                <input type="submit" name="" class="btn btn-success" value="Add Category">
+                                 
+                              </div>
+                           </form>
+         </div>
           <!-- /.card-body -->
           <div class="card-footer">
           

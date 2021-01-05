@@ -17,8 +17,8 @@ class CreateShopsTable extends Migration
             $table->id();
             $table->integer('category_id');
             $table->integer('subcategory_id');
-            $table->srting('shop_name');
-            $table->srting('shop_branch');
+            $table->string('shop_name');
+            $table->string('shop_branch');
             $table->string('phone');
             $table->timestamps();
         });
