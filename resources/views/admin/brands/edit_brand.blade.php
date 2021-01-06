@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Add Category')
+@section('title', 'Edit Brand')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Category</h1>
+            <h1>Edit Brand</h1>
           </div>
           <div class="col-sm-6">
            <!--  <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Add Category</h3>
+            <h3 class="card-title">Edit Brand</h3>
            
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -37,23 +37,26 @@
             </div>
           </div>
           <!-- /.card-header -->
-           @if ($errors->has('category_name'))
-                    <span class="text-danger">{{ $errors->first('category_name') }}</span>
+           @if ($errors->has('brand_name'))
+                    <span class="text-danger">{{ $errors->first('brand_name') }}</span>
                 @endif
-         <form action="{{ route('categories.store')}}" method="POST">
+         <form action="{{ route('brands.update', $brand->id) }}" method="POST">
             @csrf
+            @method('PATCH')
             <div class="form-group">
               <div class="col-md-6">
-                 <label>Category Name</label>
-                 <input type="text" name="category_name" class="form-control">                          
+                 <label>Brand Name</label>
+                 <input type="text" name="brand_name" class="form-control" value="{{ $brand->brand_name}}">
+        
+                  
                </div>
               </div>
               <div class="form-group">
               <div class="col-md-6">
                  <label>Status</label>
                  <select class="form-control" name="status">
-                   <option value="1">Active</option>
-                   <option value="0">Inactive</option>
+                   <option value="1" <?php if ($brand->status == '1') { echo 'selected'; }?> >Active</option>
+                   <option value="0" <?php if ($brand->status == '0') { echo 'selected'; }?> >Inactive</option>
                  </select>
                </div>
           </div>

@@ -16,10 +16,11 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->integer('category_id');
-            $table->integer('subcategory_id');
-            $table->srting('shop_name');
-            $table->srting('shop_branch');
+            
+            $table->string('shop_name');
+            $table->string('shop_address');            
             $table->string('phone');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

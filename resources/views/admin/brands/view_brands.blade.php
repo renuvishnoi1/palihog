@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Category List')
+@section('title', 'Brand List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Categories</h1>
+            <h1>Brands</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -31,7 +31,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('categories.create')}}" class="btn btn-success">Add Category</a>
+                <a href="{{ route('brands.create')}}" class="btn btn-success">Add Brand</a>
                 <a href=""></a>
 
               </div>
@@ -41,16 +41,16 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Category</th>
+                    <th>Brand</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $category)
+                    @foreach($data as $brand)
                   <tr>
-                    <td>{{ $category->category_name }}</td>
-                    <?php if($category->status =='1'){
+                    <td>{{ $brand->brand_name }}</td>
+                    <?php if($brand->status =='1'){
                       $status='Active';
 
                     }else{
@@ -60,13 +60,13 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                       <form action="{{ route('brands.destroy', $brand->id) }}" method="POST">
 
-                       <!--  <a href="{{ route('categories.show', $category->id) }}" title="show">
+                       <!--  <a href="{{ route('brands.show', $brand->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('categories.edit', $category->id) }}">
+                        <a href="{{ route('brands.edit', $brand->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -86,7 +86,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Category</th>
+                   <th>Brand</th>
                     <th>Status</th>
                     
                     <th>Action</th>

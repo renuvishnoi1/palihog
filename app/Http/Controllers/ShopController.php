@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Shop;
+use App\Models\Category;
 
 class ShopController extends Controller
 {
@@ -13,7 +15,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('admin.shops.view_shop');
+        $data = Shop::all();
+        return view('admin.shops.view_shops')->with(compact('data'));
     }
 
     /**
@@ -23,7 +26,9 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        //dd($category);
+        return view('admin.shops.add_shop')->with(compact('category'));
     }
 
     /**
@@ -34,7 +39,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $shop = new Shop();
     }
 
     /**

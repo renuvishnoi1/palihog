@@ -56,7 +56,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('brands.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               Brands               
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{{ route('shops.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Shops               
