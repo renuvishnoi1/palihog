@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
- use App\models\Brand;
 
 use Illuminate\Http\Request;
-
-class BrandController extends Controller
+ 
+ use App\models\Category;
+use DB;
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $data= Brand::all();
-        return view('admin.brands.view_brands')->with(compact('data'));
+        $data= Category::all();
+
+        return view('admin.categories.view_category')->with(compact('data'));
     }
 
     /**
@@ -25,11 +27,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-
         $levels=Category::where(['parent_id'=>0])->get();
         
         return view('admin.categories.add_category')->with(compact('levels'));
-
     }
 
     /**
@@ -40,15 +40,8 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $brand= new Brand();        
+        $category= new Category();        
          $this->validate($request,[
-
-         'brand_name'=>'required',
-         ]);
-         $brand->brand_name= $request['brand_name'];        
-        $brand->status= $request['status'];
-        $brand->save();         
-        return redirect('/brands')->with('message', 'Brand added successfully'); 
          'name'=>'required',
          
          ]);
@@ -79,7 +72,6 @@ class BrandController extends Controller
          
           return redirect('/categories')->with('message', 'Category added successfully');
 
-
     }
 
     /**
@@ -101,8 +93,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::find($id);
-        return view('admin.brands.edit_brand')->with(compact('brand'));
+          //dd($id);
+        $category= Category::find($id);
+        return view('admin.categories.edit_category')->with(compact('category'));
     }
 
     /**
@@ -114,14 +107,16 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $brand= Brand::find($id);        
-         $this->validate($request,[
-         'brand_name'=>'required',
+        //dd($request);
+      $category=Category::find($id);
+      $this->validate($request,[
+         'category_name'=>'required',
+         
          ]);
-         $brand->brand_name= $request['brand_name'];        
-         $brand->status= $request['status'];
-         $brand->save();         
-         return redirect('/brands')->with('message', 'Brand Updated successfully'); 
+       $category->category_name= $request['category_name'];
+        $category->status= $request['status'];
+        $category->save();
+        return redirect('/categories')->with('message', 'Category updated successfully');
     }
 
     /**
@@ -132,8 +127,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $brand = Brand::find($id); 
-        $brand->delete();
-        return redirect('/brands')->with('message', 'Brand Deleted successfully');
+        Category::where('id',$id)->delete();
+         return redirect('/categories');
     }
 }
