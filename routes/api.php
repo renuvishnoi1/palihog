@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/registration', [App\Http\Controllers\UserApiController::class,'register']);
 Route::post('/login', [App\Http\Controllers\UserApiController::class,'login']);
-Route::get('/login', [App\Http\Controllers\UserApiController::class,'login'])->name('login');
-Route::middleware('auth:api')->get('/category_list',  [App\Http\Controllers\UserApiController::class,'categoryList']
-);
+
+
+//
+
+Route::get('/categorylist', [App\Http\Controllers\CategoryApiController::class,'getCategoryList'])->name('categorylist');
+Route::get('/subcategorylist/{id}', [App\Http\Controllers\CategoryApiController::class,'subCategory'])->name('subcategorylist');

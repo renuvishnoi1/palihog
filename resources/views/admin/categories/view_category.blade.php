@@ -42,6 +42,7 @@
                   <thead>
                   <tr>
                     <th>Category</th>
+                    <th>Parent ID</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
@@ -49,7 +50,8 @@
                   <tbody>
                     @foreach($data as $category)
                   <tr>
-                    <td>{{ $category->category_name }}</td>
+                    <td>{{ $category->name }}</td>
+                     <td>{{ $category->parent_id }}</td>
                     <?php if($category->status =='1'){
                       $status='Active';
 
@@ -68,7 +70,6 @@
 
                         <a href="{{ route('categories.edit', $category->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
-
                         </a>
 
                         @csrf
@@ -87,8 +88,8 @@
                   <tfoot>
                   <tr>
                    <th>Category</th>
-                    <th>Status</th>
-                    
+                    <th>Parent ID</th>
+                    <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </tfoot>

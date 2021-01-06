@@ -37,35 +37,45 @@
             </div>
           </div>
           <!-- /.card-header -->
-           @if ($errors->has('category_name'))
-                    <span class="text-danger">{{ $errors->first('category_name') }}</span>
+           @if ($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
+                  <div class="panel-body">
          <form action="{{ route('categories.update', $category->id) }}" method="POST">
             @csrf
             @method('PATCH')
-            <div class="form-group">
-              <div class="col-md-6">
-                 <label>Category Name</label>
-                 <input type="text" name="category_name" class="form-control" value="{{ $category->category_name}}">
-        
-                  
-               </div>
-              </div>
-              <div class="form-group">
-              <div class="col-md-6">
-                 <label>Status</label>
-                 <select class="form-control" name="status">
-                   <option value="1" <?php if ($category->status == '1') { echo 'selected'; }?> >Active</option>
-                   <option value="0" <?php if ($category->status == '0') { echo 'selected'; }?> >Inactive</option>
-                 </select>
-               </div>
-          </div>
-           <div class="form-group">
-              <div class="col-md-6">
-             <button type="submit" class="btn btn-primary">Submit</button>
-               </div>   
-            </div>
+             <div class="form-group">
+                                 <label>Category Name</label>
+                                 <input type="text" name="name" id="category_name" class="form-control" value="{{$category->name }}" placeholder="Enter Category Name" required>
+                              </div>
+                              <div class="form-group">
+                                 <label>Parent Category </label>
+                                 <select name="parent_id" id="parent_id" class="form-control">
+
+                                    <option value="0">parent category</option>
+                                    @foreach($levels as $val)
+                                    <option value="{{ $val->id}}">{{ $val->name}}</option>
+
+                                    @endforeach
+                                 </select>
+
+                              </div>
+                              <div class="form-group">
+                                 <label>Image</label>
+                                 <input type="file" name="image" id="image" class="form-control" >
+                              </div>
+                              <div class="form-group">
+                                 <label>Category Description</label>
+                                 <textarea name="description" class="form-control" id="category_description" cols="30" rows="10"></textarea>
+                              </div>
+                              
+                                                            
+                              <div class="reset-button">
+                                <input type="submit" name="" class="btn btn-success" value="Add Category">
+                                 
+                              </div>
            </form>
+         </div>
           <!-- /.card-body -->
           <div class="card-footer">
           

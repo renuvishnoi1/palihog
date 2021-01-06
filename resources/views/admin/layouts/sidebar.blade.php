@@ -47,14 +47,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('sub_categories.index')}}" class="nav-link">
-              <i class="nav-icon fa fa-list"></i>
-              <p>
-               Sub Category               
-              </p>
-            </a>
-          </li>
+         
           <li class="nav-item">
             <a href="{{ route('brands.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

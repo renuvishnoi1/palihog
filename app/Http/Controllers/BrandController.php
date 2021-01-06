@@ -49,35 +49,10 @@ class BrandController extends Controller
         $brand->status= $request['status'];
         $brand->save();         
         return redirect('/brands')->with('message', 'Brand added successfully'); 
-         'name'=>'required',
          
-         ]);
-         $category->name= $request['name'];
-          $category->parent_id= $request['parent_id'];
-         if(!empty($request['description'])){
-                $category->description=$request['description'];
-            }else{
-                $category->description='';
-            }
-            
-            // upload image
-            if($request->hasfile('image')){
-                echo $img_temp= $request['image'];
-                if($img_temp->isValid()){
-                // image path code
-                $extension = $img_temp->getClientOriginalExtension();
-                $filename= time().'.'.$extension;
-                
-                $request['image']->move(public_path('uploads/categories/'), $filename);
-                
-                $category->image= $filename;
-            }
-            }
-
+         
        
-        $category->save();
-         
-          return redirect('/categories')->with('message', 'Category added successfully');
+        
 
 
     }
