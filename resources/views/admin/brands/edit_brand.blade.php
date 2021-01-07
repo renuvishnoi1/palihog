@@ -40,25 +40,29 @@
            @if ($errors->has('brand_name'))
                     <span class="text-danger">{{ $errors->first('brand_name') }}</span>
                 @endif
+                <div class="panel-body">
          <form action="{{ route('brands.update', $brand->id) }}" method="POST">
             @csrf
             @method('PATCH')
             <div class="form-group">
-              <div class="col-md-6">
+              
                  <label>Brand Name</label>
-                 <input type="text" name="brand_name" class="form-control" value="{{ $brand->brand_name}}">
-        
+                 <input type="text" name="brand_name" class="form-control" value="{{ $brand->brand_name}}">     
                   
-               </div>
+              
               </div>
               <div class="form-group">
-              <div class="col-md-6">
+                                 <label>Image</label>
+                                 <input type="file" name="image" id="image" class="form-control" >
+                              </div> 
+              <div class="form-group">
+              
                  <label>Status</label>
                  <select class="form-control" name="status">
                    <option value="1" <?php if ($brand->status == '1') { echo 'selected'; }?> >Active</option>
                    <option value="0" <?php if ($brand->status == '0') { echo 'selected'; }?> >Inactive</option>
                  </select>
-               </div>
+               
           </div>
            <div class="form-group">
               <div class="col-md-6">
@@ -66,6 +70,7 @@
                </div>   
             </div>
            </form>
+         </div>
           <!-- /.card-body -->
           <div class="card-footer">
           

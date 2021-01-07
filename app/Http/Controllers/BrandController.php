@@ -25,10 +25,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-
-        $levels=Category::where(['parent_id'=>0])->get();
-        
-        return view('admin.categories.add_category')->with(compact('levels'));
+              
+        return view('admin.brands.add_brand');
 
     }
 
@@ -45,7 +43,19 @@ class BrandController extends Controller
 
          'brand_name'=>'required',
          ]);
-         $brand->brand_name= $request['brand_name'];        
+         $brand->brand_name= $request['brand_name']; 
+         if($request->hasfile('image')){
+                echo $img_temp= $request['image'];
+                if($img_temp->isValid()){
+                // image path code
+                $extension = $img_temp->getClientOriginalExtension();
+                $filename= time().'.'.$extension;
+                
+                $request['image']->move(public_path('uploads/brand/'), $filename);
+                
+                $brand->image= $filename;
+            }    
+            }   
         $brand->status= $request['status'];
         $brand->save();         
         return redirect('/brands')->with('message', 'Brand added successfully'); 
@@ -93,7 +103,19 @@ class BrandController extends Controller
          $this->validate($request,[
          'brand_name'=>'required',
          ]);
-         $brand->brand_name= $request['brand_name'];        
+         $brand->brand_name= $request['brand_name'];
+          if($request->hasfile('image')){
+                echo $img_temp= $request['image'];
+                if($img_temp->isValid()){
+                // image path code
+                $extension = $img_temp->getClientOriginalExtension();
+                $filename= time().'.'.$extension;
+                
+                $request['image']->move(public_path('uploads/brand/'), $filename);
+                
+                $brand->image= $filename;
+            }       
+            }      
          $brand->status= $request['status'];
          $brand->save();         
          return redirect('/brands')->with('message', 'Brand Updated successfully'); 

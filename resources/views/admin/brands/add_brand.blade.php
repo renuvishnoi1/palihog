@@ -40,36 +40,29 @@
 
           
                 <div class="panel-body">
-         <form action="{{ route('categories.store')}}" method="POST" enctype="multipart/form-data">
+         <form action="{{ route('brands.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
         <div class="form-group">
-                                 <label>Category Name</label>
-                                 <input type="text" name="name" id="category_name" class="form-control" placeholder="Enter Category Name" required>
+                                 <label>Brand Name</label>
+                                 <input type="text" name="brand_name" id="brand_name" class="form-control" placeholder="Enter Brand Name" required>
                               </div>
-                              <div class="form-group">
-                                 <label>Parent Category </label>
-                                 <select name="parent_id" id="parent_id" class="form-control">
-
-                                    <option value="0">parent category</option>
-                                    @foreach($levels as $val)
-                                    <option value="{{ $val->id}}">{{ $val->name}}</option>
-
-                                    @endforeach
-                                 </select>
-
-                              </div>
+                             
                               <div class="form-group">
                                  <label>Image</label>
                                  <input type="file" name="image" id="image" class="form-control" >
-                              </div>
+                              </div>                          
                               <div class="form-group">
-                                 <label>Category Description</label>
-                                 <textarea name="description" class="form-control" id="category_description" cols="30" rows="10"></textarea>
-                              </div>
-                              
+              
+                 <label>Status</label>
+                 <select class="form-control" name="status">
+                   <option value="1"  >Active</option>
+                   <option value="0"  >Inactive</option>
+                 </select>
+               
+          </div>
                                                             
                               <div class="reset-button">
-                                <input type="submit" name="" class="btn btn-success" value="Add Category">
+                                <input type="submit" name="" class="btn btn-success" value="Add Brand">
                                  
                               </div>
                            </form>
