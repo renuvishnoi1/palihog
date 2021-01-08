@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- use App\models\Brand;
+ use App\Models\Brand;
 
 use Illuminate\Http\Request;
 
@@ -58,13 +58,10 @@ class BrandController extends Controller
             }   
         $brand->status= $request['status'];
         $brand->save();         
-        return redirect('/brands')->with('message', 'Brand added successfully'); 
-         
+        return redirect('/brands')->with('message', 'Brand added successfully');        
          
        
         
-
-
     }
 
     /**

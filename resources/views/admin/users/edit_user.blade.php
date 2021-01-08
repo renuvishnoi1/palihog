@@ -37,87 +37,66 @@
             </div>
           </div>
           <!-- /.card-header -->
-          
+          <div class="panel-body">
          <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
             @method('PATCH')
-            <div class="row">
-              <div class="col-md-12">
-              <div class="col-md-6">
-                 <label>User Name </label>                
-                <input type="text" name="name" class="form-control" value="{{ $user->name}}">
-                 @if ($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif                         
-               </div>
-               <div class="col-md-6">
+                <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="first_name" id="brand_name" class="form-control" value="{{  $user->first_name }}" placeholder="Enter First Name" >
+                  </div>
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" name="last_name" id="last_name" class="form-control" value="{{  $user->last_name }}" placeholder="Enter Last Name" >
+                  </div>
+             
+               <div class="form-group">
                  <label> Email</label>                
                  <input type="text" name="email" class="form-control" value="{{ $user->email }}">  
                  @if ($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif                     
                </div>
-             </div>
-            
-              </div>
-              <div class="row">
-                 <div class="col-md-12">
-              <div class="col-md-6">
+              <div class="form-group">                 
                  <label>Phone Number </label>                
                 <input type="text" name="phone_number" class="form-control" value="{{ $user->phone_number }}">   
                 @if ($errors->has('phone_number'))
                     <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                 @endif                      
-               </div>
-               <div class="col-md-6">
-                 <label>User Type</label>                
-                 <select class="form-control" name="type">
-                  <option value="">Plase Select Type</option>
-                    <option value="2" <?php if($user->type==2){ echo 'selected'; } ?>>User</option>
-                   <option value="3" <?php if($user->type==3){ echo 'selected'; } ?>>Rider</option>
-                 </select>    
-                  @if ($errors->has('type'))
-                    <span class="text-danger">{{ $errors->first('type') }}</span>
-                @endif                    
-               </div>
-             </div>
-              </div>
-               <div class="row">
-                 <div class="col-md-12">
-              <div class="col-md-6">
+               </div>              
+            
+               <div class="form-group">                
                  <label>Password </label>                
                 <input type="text" name="password" class="form-control" >  
-                                     
+                @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                @endif                        
                </div>
-               <div class="col-md-6">
+               <div class="form-group">
                  <label>Confirm Password</label>                
-                  <input type="text" name="c_password" class="form-control" >                               
-               </div>
-             </div>
+                  <input type="text" name="c_password" class="form-control" > 
+                  @if ($errors->has('c_password'))
+                    <span class="text-danger">{{ $errors->first('c_password') }}</span>
+                @endif               
+             
               </div>
-              <div class="row">
-               <div class="col-md-12">
-                <div class="col-md-6">
+              <div class="form-group">
+              
                  <label>Status</label>
                  <select class="form-control" name="status">
-                   <option value="1" <?php if($user->status==1){ echo 'selected'; } ?>>Active</option>
-                   <option value="0" <?php if($user->status==0){ echo 'selected'; } ?>>Inactive</option>
+                   <option value="1" <?php if ($user->status == '1') { echo 'selected'; }?>>Active</option>
+                   <option value="0" <?php if ($user->status == '0') { echo 'selected'; }?>>Inactive</option>
                  </select>
-               </div>
-               <div class="col-md-6"></div>
+               
              </div>
-              </div>             
-           <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-6">
+                         
+           <div class="fubmit-button">
+           
              <button type="submit" class="btn btn-primary">Submit</button>
-               </div>   
-                <div class="col-md-6">
-            <a href="{{ route('users.index')}}" class="btn btn-danger">Cancel</a>
-               </div> 
-            </div>
+             
           </div>
            </form>
+         </div>
           <!-- /.card-body -->
           <div class="card-footer">
           

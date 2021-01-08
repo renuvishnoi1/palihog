@@ -21,10 +21,10 @@ Route::post('/registration', [App\Http\Controllers\UserApiController::class,'reg
 Route::post('/login', [App\Http\Controllers\UserApiController::class,'login']);
 
 
-//productList
+//List api
 
 Route::get('/categorylist', [App\Http\Controllers\ApiController::class,'getCategoryList'])->name('categorylist');
-Route::get('/subcategorylist/{id}', [App\Http\Controllers\ApiController::class,'subCategory'])->name('subcategorylist');
+//Route::get('/subcategorylist/{id}', [App\Http\Controllers\ApiController::class,'subCategory'])->name('subcategorylist');
 Route::get('/brandlist', [App\Http\Controllers\ApiController::class,'brandList'])->name('brandlist');
 Route::get('/orderlist', [App\Http\Controllers\ApiController::class,'orderList'])->name('orderlist');
 Route::post('/placeorder', [App\Http\Controllers\ApiController::class,'placeOrder'])->name('placeorder');

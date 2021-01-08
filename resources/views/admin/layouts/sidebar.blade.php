@@ -63,23 +63,22 @@
                Shops               
               </p>
             </a>
-          </li>
+          </li>        
          
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Layout Options
+                General Setting
                 <i class="fas fa-angle-left right"></i>
                
               </p>
             </a>
-            <ul class="nav nav-treeview">
-             
+            <ul class="nav nav-treeview">             
               <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                <a href="{{ route('banners.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
+                  <p>Banner</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -95,7 +94,7 @@
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li>
         
        
           

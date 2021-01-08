@@ -26,7 +26,8 @@ class ShopController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
+        $category = Category::where(['parent_id'=>0])->get();
+
         //dd($category);
         return view('admin.shops.add_shop')->with(compact('category'));
     }
@@ -39,7 +40,27 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $shop = new Shop();
+       //dd($shop);
+         $this->validate($request,[
+         'shop_name'=>'required',
+         'phone'=>'required',
+         'shop_address'=>'required',
+         'shop_branch'=>'required'
+         ]);
+         $shop['shop_name'] = $request->shop_name;
+         $shop['phone'] = $request->phone;
+         $shop['shop_address'] = $request->shop_address;
+         $shop['shop_branch'] = $request->shop_branch;
+         $shop['category_id'] = $request->category_id;
+         $shop['status'] = $request->status;
+
+         $shop->save();
+         //dd($shop);
+         return redirect('/shops')->with('message', 'Shop added successfully');
+
     }
 
     /**
@@ -61,7 +82,10 @@ class ShopController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::where(['parent_id'=>0])->get();
+        $shop = Shop::find($id);
+        return view('admin.shops.edit_shop')->with(compact('shop','category'));
+        
     }
 
     /**
@@ -73,7 +97,21 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $shop = Shop::find($id);
+         $this->validate($request,[
+         'shop_name'=>'required',
+         'phone'=>'required',
+         'shop_address'=>'required',
+         'shop_branch'=>'required'
+         ]);
+         //dd($request);
+         $shop['shop_name'] = $request->shop_name;
+         $shop['phone'] = $request->phone;
+         $shop['shop_address'] = $request->shop_address;
+         $shop['shop_branch'] = $request->shop_branch;
+         $shop['category_id'] = $request->category_id;
+         $shop->save();
+         return redirect('/shops')->with('message', 'Shop updated successfully');
     }
 
     /**
@@ -84,6 +122,8 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shop = Shop::find($id);
+        $shop->delete();
+        return redirect('/shops')->with('message', 'Shop deleted successfully');
     }
 }

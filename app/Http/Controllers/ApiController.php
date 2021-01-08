@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Category;
-use App\models\Brand;
-use App\models\Order;
-use App\models\Product;
-use App\models\Offer;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Offer;
 use Validator;
 
 class ApiController extends Controller

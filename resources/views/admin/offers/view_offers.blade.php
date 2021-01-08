@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'User List')
+@section('title', 'Shops List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Users</h1>
+            <h1>Offer</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -31,7 +31,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('users.create')}}" class="btn btn-success">Add User</a>
+                <a href="{{ route('shops.create')}}" class="btn btn-success">Add Shop</a>
                 <a href=""></a>
 
               </div>
@@ -41,24 +41,22 @@
                 <table id="example" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th> 
-                    
+                    <th>Category</th>
+                    <th>Shop Name</th>
+                    <th>Shop Address</th>
+                    <th>Phone</th>                   
                     <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $user)
+                    @foreach($data as $shop)
                   <tr>
-                    <td>{{ $user->first_name }}</td>
-                    <td>{{ $user->last_name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone_number }}</td>
-                   
-                    <?php if($user->status =='1'){
+                    <td>{{ $shop->shop_name }}</td>
+                    <td>{{ $shop->email }}</td>
+                    <td>{{ $shop->phone_number }}</td>
+                    
+                    <?php if($shop->status =='1'){
                       $status='Active';
 
                     }else{
@@ -68,13 +66,13 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                       <form action="{{ route('shops.destroy', $shop->id) }}" method="POST">
 
-                       <!--  <a href="{{ route('users.show', $user->id) }}" title="show">
+                       <!--  <a href="{{ route('shops.show', $shop->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('users.edit', $user->id) }}">
+                        <a href="{{ route('shops.edit', $shop->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -94,11 +92,10 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>First Name</th>
-                   <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th> 
-                   
+                   <th>Category</th>
+                    <th>Shop Name</th>
+                    <th>Shop Address</th>
+                    <th>Phone</th>                   
                     <th>Status</th>                   
                     <th>Action</th>
                   </tr>

@@ -27,3 +27,5 @@ Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 Route::resource('/users', App\Http\Controllers\UserManagementController::class);
 Route::resource('/brands', App\Http\Controllers\BrandController::class);
 Route::resource('/shops', App\Http\Controllers\ShopController::class);
+Route::resource('/offers', App\Http\Controllers\OfferController::class);
+Route::resource('/banners', App\Http\Controllers\BannerController::class);

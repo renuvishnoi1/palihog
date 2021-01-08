@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\User;
+use App\Models\Users;
 
 class UserManagementController extends Controller
 {
@@ -14,7 +14,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $data = User::where('type','!=',1)->get();
+        $data = Users::all();
         
         return view('admin.users.view_users')->with(compact('data'));
     }
@@ -37,21 +37,20 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-      $user= new User();
-        
+      $user= new Users();        
          $this->validate($request,[
-         'name'=>'required',
+         'first_name'=>'required',
+         'last_name'=>'required',
          'email'=>'required|email|unique:users',
          'password'=>'required|min:6',
-         'c_password'=>'required|same:password',
-         'type'=>'required',
+         'c_password'=>'required|same:password',        
          'phone_number'=>'required|numeric|digits:10',
          
          ]);
-         $user->name = $request['name'];
+         $user->first_name = $request['first_name'];
+         $user->last_name = $request['last_name'];
          $user->email = $request['email'];
-        $user->password = bcrypt($request['password']);
-        $user->type = $request['type'];
+        $user->password = bcrypt($request['password']);       
         $user->phone_number = $request['phone_number'];
         $user->status = $request['status'];
         $user->save();
@@ -78,7 +77,7 @@ class UserManagementController extends Controller
      */
     public function edit($id)
     {
-        $user=User::find($id);
+        $user=Users::find($id);
 
         return view('admin.users.edit_user')->with(compact('user'));
     }
@@ -92,22 +91,22 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user= User::find($id);
+        $user= Users::find($id);
         $this->validate($request,[
-         'name'=>'required',
-         'email'=>'required|email',
-         
-          'type'=>'required',
+         'first_name'=>'required',
+         'last_name'=>'required',
+         'email'=>'required|email',  
           'phone_number'=>'required|numeric|digits:10',
          
          ]);
-         $user->name = $request['name'];
+         $user->first_name = $request['first_name'];
+         $user->last_name = $request['last_name'];
          $user->email = $request['email'];
        if ( $request['password'] != '')
-    {
+       {
         $user->password = bcrypt($request['password']);
-    }
-        $user->type = $request['type'];
+       }
+        
         $user->phone_number = $request['phone_number'];
         $user->status = $request['status'];
         $user->save();
@@ -123,7 +122,7 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        $user= User::find($id);
+        $user= Users::find($id);
         $user->delete();
          return redirect('/users')->with('message', 'User deleted successfully');
     }

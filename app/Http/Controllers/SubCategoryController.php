@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\SubCategory;
- use App\models\Category;
+use App\Models\SubCategory;
+ use App\Models\Category;
 use DB;
 
 class SubCategoryController extends Controller
@@ -20,8 +20,7 @@ class SubCategoryController extends Controller
        ->join('categories', 'categories.id', '=', 'sub_categories.category_id')      
        ->select('categories.category_name', 'sub_categories.*')
        ->get();
-        // /dd($data);
-        
+        // /dd($data);        
 
         return view('admin.subcategories.view_subcategory')->with(compact(['data']));
     }

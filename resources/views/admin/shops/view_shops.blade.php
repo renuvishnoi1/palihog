@@ -41,7 +41,7 @@
                 <table id="example" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Category</th>
+                    
                     <th>Shop Name</th>
                     <th>Shop Address</th>
                     <th>Phone</th>                   
@@ -51,10 +51,10 @@
                   </thead>
                   <tbody>
                     @foreach($data as $shop)
-                  <tr>
-                    <td>{{ $shop->name }}</td>
-                    <td>{{ $shop->email }}</td>
-                    <td>{{ $shop->phone_number }}</td>
+                  <tr>                  
+                    <td>{{ $shop->shop_name }}</td>
+                    <td>{{ $shop->shop_address }}</td>
+                    <td>{{ $shop->phone }}</td>
                     
                     <?php if($shop->status =='1'){
                       $status='Active';
@@ -92,7 +92,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Category</th>
+                  
                     <th>Shop Name</th>
                     <th>Shop Address</th>
                     <th>Phone</th>                   

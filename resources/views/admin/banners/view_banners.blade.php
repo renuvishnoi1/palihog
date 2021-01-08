@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'User List')
+@section('title', 'Banners List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Users</h1>
+            <h1>Banners</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -23,7 +23,6 @@
     </div>
 @endif
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -31,34 +30,30 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('users.create')}}" class="btn btn-success">Add User</a>
+                <a href="{{ route('banners.create')}}" class="btn btn-success">Add Banner</a>
                 <a href=""></a>
-
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th> 
-                    
-                    <th>Status</th>                   
+                    <th>Heading</th>
+                    <th>Sub Heading</th>                   
+                    <th>Banner Image</th>
+                    <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $user)
+                    @foreach($data as $banner)
                   <tr>
-                    <td>{{ $user->first_name }}</td>
-                    <td>{{ $user->last_name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone_number }}</td>
-                   
-                    <?php if($user->status =='1'){
+                    <td>{{ $banner->heading }}</td>
+                    <td>{{ $banner->sub_heading }}</td>                    
+                    <td></td>
+                    
+                    <?php if($banner->status =='1'){
                       $status='Active';
 
                     }else{
@@ -68,13 +63,12 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-
-                       <!--  <a href="{{ route('users.show', $user->id) }}" title="show">
+                       <form action="{{ route('banners.destroy', $banner->id) }}" method="POST">
+                       <!--  <a href="{{ route('banners.show', $banner->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('users.edit', $user->id) }}">
+                        <a href="{{ route('banners.edit', $banner->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -88,18 +82,16 @@
                     </form>
                     </td>
                    
-                  </tr>
+                  </tr>l
                   @endforeach
                  
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>First Name</th>
-                   <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th> 
-                   
-                    <th>Status</th>                   
+                   <th>Heading</th>
+                    <th>Sub Heading</th>                   
+                    <th>Banner Image</th>
+                    <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </tfoot>
@@ -119,14 +111,4 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>   
-  @stack('scripts')
- 
-  <script type="text/javascript">
-    $(document).ready(function() {
-    $('#example').DataTable();
-} );
-
-  </script>
-  @endstack
-   @endsection
+  </div>    @endsection
