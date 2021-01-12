@@ -20,8 +20,8 @@ class CreateUserLoginTable extends Migration
             $table->string('email')->unique();            
             $table->string('password');          
             $table->string('phone_number')->nullable();
-            $table->string('device_name');
-            $table->string('token');
+            $table->string('device_name')->nullable();
+            $table->string('token')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

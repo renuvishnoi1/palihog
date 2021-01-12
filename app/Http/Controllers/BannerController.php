@@ -16,8 +16,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $data= Banner::all();
-       
+        $data= Banner::all();       
         return view('admin.banners.view_banners')->with(compact('data'));
     }
 
@@ -59,8 +58,7 @@ class BannerController extends Controller
                 
                 $banner->banner_image= $filename;
             }    
-            } 
-         
+            }          
          $banner->save();
          return redirect('/banners')->with('message', 'Banner saved successfully');
     }
@@ -100,8 +98,7 @@ class BannerController extends Controller
         $banner = Banner::find($id);
         $this->validate($request,[
          'heading'=>'required',
-         'sub_heading'=>'required',
-        
+         'sub_heading'=>'required',        
          ]);
          //dd($request);
          $banner['heading'] = $request->heading;

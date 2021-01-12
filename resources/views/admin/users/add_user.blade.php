@@ -42,11 +42,17 @@
             
                 <div class="form-group">
                              <label>First Name</label>
-                               <input type="text" name="first_name" id="brand_name" class="form-control" placeholder="Enter First Name" >
+                               <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter First Name" value="{{ old('first_name')}}" >
+                               @if ($errors->has('first_name'))
+                    <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                @endif 
                               </div>
                                 <div class="form-group">
                               <label>Last Name</label>
-                                 <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter Last Name" >
+                                 <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter Last Name" value="{{ old('last_name')}}" >
+                                 @if ($errors->has('last_name'))
+                    <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                @endif
                               </div>
              
                <div class="form-group">

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Banners List')
+@section('title', 'Product List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Banners</h1>
+            <h1>Product</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('banners.create')}}" class="btn btn-success">Add Banner</a>
+                <a href="{{ route('products.create')}}" class="btn btn-success">Add Product</a>
                 <a href=""></a>
               </div>
 
@@ -39,9 +39,9 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
+                    <th>Product Name</th>
+                    <th>Code</th>                   
+                    <th>Price</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>

@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ route('dashboard') }}" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
@@ -22,8 +22,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="{{ route('dashboard')}}" class="nav-link active">
+          <li class="nav-item menu-open ">
+            <a href="{{ route('dashboard')}}" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard               
@@ -31,7 +31,7 @@
             </a>
            
           </li>
-           <li class="nav-item">
+           <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
             <a href="{{ route('users.index') }}" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
@@ -40,7 +40,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="{{ route('categories.index')}}" class="nav-link">
+            <a href="{{ route('categories.index')}}" class="nav-link {{ Request::is('categories*') ? 'active' : '' }}">
               <i class="nav-icon fa fa-list"></i>
               <p>
                Category               
@@ -49,7 +49,7 @@
           </li>
          
           <li class="nav-item">
-            <a href="{{ route('brands.index') }}" class="nav-link">
+            <a href="{{ route('brands.index') }}" class="nav-link {{ Request::is('brands*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Brands               
@@ -57,13 +57,13 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="{{ route('shops.index') }}" class="nav-link">
+            <a href="{{ route('shops.index') }}" class="nav-link {{ Request::is('shops*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Shops               
               </p>
             </a>
-          </li>        
+          </li> 
          
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -75,24 +75,37 @@
               </p>
             </a>
             <ul class="nav nav-treeview">             
-              <li class="nav-item">
-                <a href="{{ route('banners.index') }}" class="nav-link">
+              <li class="nav-item ">
+                <a href="{{ route('banners.index') }}" class="nav-link {{ Request::is('banners*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Banner</p>
                 </a>
               </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Static Pages
+                <i class="fas fa-angle-left right"></i>               
+              </p>
+            </a>
+            <ul class="nav nav-treeview"> 
               <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
+                <a href="{{ route('privacy.index') }}" class="nav-link {{ Request::is('privacy*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
+                  <p>Privacy Policy</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                <a href="{{ route('aboutus.index') }}" class="nav-link {{ Request::is('aboutus*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
+                  <p>About US</p>
                 </a>
               </li>
+              
             </ul>
           </li>
         

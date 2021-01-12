@@ -46,7 +46,7 @@ class ShopController extends Controller
        //dd($shop);
          $this->validate($request,[
          'shop_name'=>'required',
-         'phone'=>'required',
+         'phone'=>'required|numeric|digits:10',
          'shop_address'=>'required',
          'shop_branch'=>'required'
          ]);
@@ -100,7 +100,7 @@ class ShopController extends Controller
         $shop = Shop::find($id);
          $this->validate($request,[
          'shop_name'=>'required',
-         'phone'=>'required',
+         'phone'=>'required|numeric|digits:10',
          'shop_address'=>'required',
          'shop_branch'=>'required'
          ]);
@@ -110,6 +110,7 @@ class ShopController extends Controller
          $shop['shop_address'] = $request->shop_address;
          $shop['shop_branch'] = $request->shop_branch;
          $shop['category_id'] = $request->category_id;
+          $shop['status'] = $request->status;
          $shop->save();
          return redirect('/shops')->with('message', 'Shop updated successfully');
     }

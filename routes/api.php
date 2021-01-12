@@ -29,4 +29,10 @@ Route::get('/brandlist', [App\Http\Controllers\ApiController::class,'brandList']
 Route::get('/orderlist', [App\Http\Controllers\ApiController::class,'orderList'])->name('orderlist');
 Route::post('/placeorder', [App\Http\Controllers\ApiController::class,'placeOrder'])->name('placeorder');
 Route::get('/productlist', [App\Http\Controllers\ApiController::class,'productList'])->name('productlist');
+
+
+Route::post('/food_drink', [App\Http\Controllers\ApiController::class,'foodDrink'])->name('food_drink');
+Route::post('/store_list', [App\Http\Controllers\ApiController::class,'storeList'])->name('store_list');
+Route::get('/aboutus', [App\Http\Controllers\ApiController::class,'aboutUs'])->name('aboutus');
+Route::get('/dashboard', [App\Http\Controllers\ApiController::class,'dashboard'])->name('dashboard');
 Route::get('/offerlist', [App\Http\Controllers\ApiController::class,'offerList'])->name('offerlist');

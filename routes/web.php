@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard',[App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::resource('/sub_categories', App\Http\Controllers\SubCategoryController::class);
@@ -29,3 +29,6 @@ Route::resource('/brands', App\Http\Controllers\BrandController::class);
 Route::resource('/shops', App\Http\Controllers\ShopController::class);
 Route::resource('/offers', App\Http\Controllers\OfferController::class);
 Route::resource('/banners', App\Http\Controllers\BannerController::class);
+Route::resource('/products', App\Http\Controllers\ProductController::class);
+Route::resource('/privacy', App\Http\Controllers\PrivacyPolicyController::class);
+Route::resource('/aboutus', App\Http\Controllers\AboutUsController::class);

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Banners List')
+@section('title', 'Privacy')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Banners</h1>
+            <h1>Privacy</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -23,6 +23,7 @@
     </div>
 @endif
     </section>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -30,30 +31,28 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('banners.create')}}" class="btn btn-success">Add Banner</a>
+                <a href="{{ route('privacy.create')}}" class="btn btn-success">Add Privacy</a>
                 <a href=""></a>
+
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
-                    <th>Status</th>                    
+                    <th>Title</th>                                  
+                    <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $banner)
+                    @foreach($privacy as $value)
                   <tr>
-                    <td>{{ $banner->heading }}</td>
-                    <td>{{ $banner->sub_heading }}</td>                    
-                    <td><img src="{{ asset('uploads/banner/'.$banner->banner_image) }}" alt="" width="50" height="50"></td>
+                    <td>{{ $value->title }}</td>
+                   
                     
-                    <?php if($banner->status =='1'){
+                    <?php if($value->status =='1'){
                       $status='Active';
 
                     }else{
@@ -63,12 +62,13 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('banners.destroy', $banner->id) }}" method="POST">
-                       <!--  <a href="{{ route('banners.show', $banner->id) }}" title="show">
+                       <form action="{{ route('privacy.destroy', $value->id) }}" method="POST">
+
+                       <!--  <a href="{{ route('privacy.show', $value->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('banners.edit', $banner->id) }}">
+                        <a href="{{ route('privacy.edit', $value->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -88,10 +88,9 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
-                    <th>Status</th>                    
+                   <th>Title</th>
+                                      
+                    <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </tfoot>
@@ -111,4 +110,14 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>    @endsection
+  </div>   
+  @stack('scripts')
+ 
+  <script type="text/javascript">
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+  </script>
+  @endstack
+   @endsection
