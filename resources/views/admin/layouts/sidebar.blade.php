@@ -46,8 +46,7 @@
                Category               
               </p>
             </a>
-          </li>
-         
+          </li>         
           <li class="nav-item">
             <a href="{{ route('brands.index') }}" class="nav-link {{ Request::is('brands*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
@@ -64,14 +63,21 @@
               </p>
             </a>
           </li> 
+          <li class="nav-item">
+            <a href="{{ route('offers.index') }}" class="nav-link {{ Request::is('offers*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               offers               
+              </p>
+            </a>
+          </li>
          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 General Setting
-                <i class="fas fa-angle-left right"></i>
-               
+                <i class="fas fa-angle-left right"></i>               
               </p>
             </a>
             <ul class="nav nav-treeview">             
@@ -81,19 +87,7 @@
                   <p>Banner</p>
                 </a>
               </li>
-             
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Static Pages
-                <i class="fas fa-angle-left right"></i>               
-              </p>
-            </a>
-            <ul class="nav nav-treeview"> 
-              <li class="nav-item">
+               <li class="nav-item">
                 <a href="{{ route('privacy.index') }}" class="nav-link {{ Request::is('privacy*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Privacy Policy</p>
@@ -105,9 +99,16 @@
                   <p>About US</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="{{ route('vehicles.index') }}" class="nav-link {{ Request::is('vehicles*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vehicles</p>
+                </a>
+              </li>
+             
             </ul>
           </li>
+          
         
        
           

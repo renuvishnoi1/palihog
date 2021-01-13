@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
- use App\Models\Offer;
+use App\Models\Vehicle;
 
-class OfferController extends Controller
+class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $data = Offer::all();
-        return view('admin.offers.view_offers')->with(compact('data'));
+        $data = Vehicle::all();
+        return view('admin.vehicles.view_vehicles')->with(compact('data'));
     }
 
     /**
@@ -25,7 +25,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        return view('admin.offers.add_offer');
+        return view('admin.vehicles.add_vehicle');
     }
 
     /**
@@ -36,31 +36,30 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        $offer = new Offer();
+        $vehicle= new Vehicle();
         $this->validate($request,[
-         'name'=>'required'        
+         'name'=>'required',
+         'type'=>'required',        
          ]);
-        $offer['name'] = $request->name;
-        
-        $offer['status'] = $request->status;
-        if($request->hasfile('image')){
+         //dd($request);
+         $vehicle['name'] = $request->name;
+         $vehicle['vehicle_type'] = $request->type;
+         $vehicle['status'] = $request->status;
+           if($request->hasfile('image')){
                 echo $img_temp= $request['image'];
                 if($img_temp->isValid()){
                 // image path code
                 $extension = $img_temp->getClientOriginalExtension();
-                $filename= time().'.'.$extension;
+                $filename = time().'.'.$extension;
                 
-                $request['image']->move(public_path('uploads/offer/'), $filename);
+                $request['image']->move(public_path('uploads/vehicle/'), $filename);
                 
-                $offer->image= url('uploads/offer/'.$filename);
+                $vehicle->image = url('uploads/vehicle/'.$filename);
             }    
-            }
-            if($request->description){
-                $offer['description'] = $request->description;
-            }
-            $offer->save();
-            return redirect('/offers')->with('message', 'Offer saved successfully');
-
+            }  
+            //dd($vehicle);        
+         $vehicle->save();
+         return redirect('/vehicles')->with('message', 'Vehicle saved successfully');
     }
 
     /**
@@ -71,7 +70,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -82,8 +81,8 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-        $offer = Offer::find($id);
-        return view('admin.offers.edit_offer')->with(compact('offer'));
+         $vehicle= Vehicle::find($id);
+        return view('admin.vehicles.edit_vehicle')->with(compact('vehicle'));
     }
 
     /**
@@ -95,31 +94,29 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $offer = Offer::find($id);
+        $vehicle= Vehicle::find($id);
         $this->validate($request,[
-         'name'=>'required'        
+         'name'=>'required',
+         'type'=>'required',        
          ]);
-        $offer['name'] = $request->name;
-        
-        $offer['status'] = $request->status;
-       if($request->hasfile('image')){
+         //dd($request);
+         $vehicle['name'] = $request->name;
+         $vehicle['vehicle_type'] = $request->type;
+         $vehicle['status'] = $request->status;
+           if($request->hasfile('image')){
                 echo $img_temp= $request['image'];
                 if($img_temp->isValid()){
                 // image path code
                 $extension = $img_temp->getClientOriginalExtension();
                 $filename= time().'.'.$extension;
                 
-                $request['image']->move(public_path('uploads/offer/'), $filename);
-                
-                $offer->image= url('uploads/offer/'.$filename);
+                $request['image']->move(public_path('uploads/vehicle/'), $filename);                
+                $vehicle->image= url('uploads/vehicle/'.$filename);
             }    
-            }
-            if($request->description){
-                $offer['description'] = $request->description;
-            }
-            //dd($offer);
-            $offer->save();
-            return redirect('/offers')->with('message', 'Offer updated successfully');
+            }  
+            //dd($vehicle);        
+         $vehicle->save();
+         return redirect('/vehicles')->with('message', 'Vehicle updated successfully');
     }
 
     /**
@@ -130,6 +127,8 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $vehicle = Vehicle::find($id);
+         $vehicle->delete();
+         return redirect('/vehicles')->with('message', 'Vehicle deleted successfully');
     }
 }

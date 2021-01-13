@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Coupon;
 use App\Models\Offer;
 use App\Models\FoodDrink;
 use App\Models\Shop;
@@ -17,8 +18,7 @@ use Validator;
 
 class ApiController extends Controller
 {
-    public function getCategoryList(Request $request){
-    	
+    public function getCategoryList(Request $request){    	
        
        $category= Category::where(['parent_id'=>0])->get();
        
@@ -31,11 +31,10 @@ class ApiController extends Controller
     }
     public function brandList(Request $request){
       $brand = Brand::all();
-//dd($brand);
+        //dd($brand);
 
       	//echo "string";
-      	return response()->json($brand,200);         
-     
+      	return response()->json($brand,200);  
            
     }
     public function productList(){
@@ -49,7 +48,6 @@ class ApiController extends Controller
     public function orderList(){
      $order = Order::all();
      return response()->json($order,200);  
-
     }
     
     public function placeOrder(Request $request){
@@ -57,7 +55,7 @@ class ApiController extends Controller
         $validator= Validator::make($request->all(),[
         'delivery_address'=>'required',
         'person_name'=>'required',
-        'mobile'=>'required',
+        'mobile'=>'required|numeric|digits:10',
         'delivery_date'=>'required',
         'delivery_time'=>'required',
         'comment'=>'required',
@@ -116,7 +114,9 @@ class ApiController extends Controller
     }
     public function dashboard(){
      $data['banner']=Banner::all();
+
      $data['category'] = Category::all();
+
      $data['merchant'] = Merchant::all();
      return response()->json([
         "success" => true,
@@ -139,7 +139,7 @@ class ApiController extends Controller
         ],200);
     }
      public function offerList(){
-        $offer = Offer::all();
+        $offer = Coupon::all();
        return response()->json([
         "success" => true,
         "message" => "Offer List",
@@ -162,6 +162,7 @@ class ApiController extends Controller
     }
    
     public function pickUp(Request $request){
+
          
     }
 }

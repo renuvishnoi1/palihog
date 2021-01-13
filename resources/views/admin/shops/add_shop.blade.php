@@ -62,8 +62,8 @@
                 @if ($errors->has('phone'))
                     <span class="text-danger">{{ $errors->first('phone') }}</span>
                 @endif                      
-               </div>              
-            
+               </div>
+               
                <div class="form-group">                
                  <label>Shop Address </label>                
                 <input type="text" name="shop_address" class="form-control" >  

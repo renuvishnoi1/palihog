@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Banners List')
+@section('title', 'Vehicle List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Banners</h1>
+            <h1>Vehicle</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('banners.create')}}" class="btn btn-success">Add Banner</a>
+                <a href="{{ route('vehicles.create')}}" class="btn btn-success">Add Vehicle</a>
                 <a href=""></a>
               </div>
 
@@ -39,21 +39,21 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
+                    <th>Name</th>
+                    <th>Type</th>          
+                    <th>Image</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $banner)
+                    @foreach($data as $vehicle)
                   <tr>
-                    <td>{{ $banner->heading }}</td>
-                    <td>{{ $banner->sub_heading }}</td>                    
-                    <td><img src="{{ $banner->banner_image }}" alt="" width="50" height="50"></td>
+                    <td>{{ $vehicle->name }}</td>
+                    <td>{{ $vehicle->vehicle_type }}</td>                    
+                    <td><img src="{{ $vehicle->image }}" alt="" width="50" height="50"></td>
                     
-                    <?php if($banner->status =='1'){
+                    <?php if($vehicle->status =='1'){
                       $status='Active';
 
                     }else{
@@ -63,12 +63,12 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('banners.destroy', $banner->id) }}" method="POST">
-                       <!--  <a href="{{ route('banners.show', $banner->id) }}" title="show">
+                       <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST">
+                       <!--  <a href="{{ route('vehicles.show', $vehicle->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('banners.edit', $banner->id) }}">
+                        <a href="{{ route('vehicles.edit', $vehicle->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -88,9 +88,9 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
+                   <th>Name</th>
+                      <th>Type</th>                   
+                    <th> Image</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>

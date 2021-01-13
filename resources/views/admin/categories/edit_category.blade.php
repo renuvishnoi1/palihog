@@ -41,7 +41,7 @@
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
                   <div class="panel-body">
-         <form action="{{ route('categories.update', $category->id) }}" method="POST">
+         <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
              <div class="form-group">

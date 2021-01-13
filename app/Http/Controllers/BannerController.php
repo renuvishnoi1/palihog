@@ -56,9 +56,10 @@ class BannerController extends Controller
                 
                 $request['banner_image']->move(public_path('uploads/banner/'), $filename);
                 
-                $banner->banner_image= $filename;
+                $banner->banner_image= url('uploads/banner/'.$filename);
             }    
-            }          
+            }  
+            //dd($banner);        
          $banner->save();
          return redirect('/banners')->with('message', 'Banner saved successfully');
     }
@@ -111,7 +112,7 @@ class BannerController extends Controller
                 $extension = $img_temp->getClientOriginalExtension();
                 $filename= time().'.'.$extension;                
                 $request['banner_image']->move(public_path('uploads/banner/'), $filename);                
-                $banner->banner_image= $filename;
+                $banner->banner_image= url('uploads/banner/'.$filename);
             }    
             } 
          

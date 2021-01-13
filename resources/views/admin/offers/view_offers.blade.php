@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Shops List')
+@section('title', 'offers List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -31,7 +31,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('shops.create')}}" class="btn btn-success">Add Shop</a>
+                <a href="{{ route('offers.create')}}" class="btn btn-success">Add Offer</a>
                 <a href=""></a>
 
               </div>
@@ -41,22 +41,21 @@
                 <table id="example" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Category</th>
-                    <th>Shop Name</th>
-                    <th>Shop Address</th>
-                    <th>Phone</th>                   
+                    <th>Name</th>
+                    
+                    <th>Image</th>                   
                     <th>Status</th>                   
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $shop)
+                    @foreach($data as $offer)
                   <tr>
-                    <td>{{ $shop->shop_name }}</td>
-                    <td>{{ $shop->email }}</td>
-                    <td>{{ $shop->phone_number }}</td>
+                    <td>{{ $offer->name }}</td>
+                    <td><img src="{{ $offer->image }}" alt="" width="50" height="50"></td>
+                   
                     
-                    <?php if($shop->status =='1'){
+                    <?php if($offer->status =='1'){
                       $status='Active';
 
                     }else{
@@ -66,13 +65,13 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('shops.destroy', $shop->id) }}" method="POST">
+                       <form action="{{ route('offers.destroy', $offer->id) }}" method="POST">
 
-                       <!--  <a href="{{ route('shops.show', $shop->id) }}" title="show">
+                       <!--  <a href="{{ route('offers.show', $offer->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('shops.edit', $shop->id) }}">
+                        <a href="{{ route('offers.edit', $offer->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -92,10 +91,9 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Category</th>
-                    <th>Shop Name</th>
-                    <th>Shop Address</th>
-                    <th>Phone</th>                   
+                    <th>Name</th>
+                    
+                    <th>Image</th>                   
                     <th>Status</th>                   
                     <th>Action</th>
                   </tr>

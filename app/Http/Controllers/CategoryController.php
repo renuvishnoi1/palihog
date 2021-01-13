@@ -62,9 +62,10 @@ class CategoryController extends Controller
                 
                 $request['image']->move(public_path('uploads/categories/'), $filename);
                 
-                $category->image= $filename;
+                $category->image= url('uploads/categories/'.$filename);
             }
             }
+            //dd($category);
 
        
           $category->save();
@@ -131,7 +132,7 @@ class CategoryController extends Controller
                 
                 $request['image']->move(public_path('uploads/categories/'), $filename);
                 
-                $category->image= $filename;
+                $category->image= url('uploads/categories/'.$filename);
             }
             }
        
