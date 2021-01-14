@@ -62,7 +62,7 @@
           </div>
                                                             
              <div class="reset-button">
-               <input type="submit" name="" class="btn btn-success" value="Add Brand">
+               <input type="submit" name="" class="btn btn-success" value="Add Banner">
                                  
                 </div>
                </form>

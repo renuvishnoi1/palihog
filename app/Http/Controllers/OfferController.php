@@ -107,8 +107,7 @@ class OfferController extends Controller
                 if($img_temp->isValid()){
                 // image path code
                 $extension = $img_temp->getClientOriginalExtension();
-                $filename= time().'.'.$extension;
-                
+                $filename= time().'.'.$extension;                
                 $request['image']->move(public_path('uploads/offer/'), $filename);
                 
                 $offer->image= url('uploads/offer/'.$filename);
@@ -130,6 +129,8 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $offer = Offer::find($id);
+        $offer->delete();
+        return redirect('/offers')->with('message', 'Offer deleted successfully');
     }
 }

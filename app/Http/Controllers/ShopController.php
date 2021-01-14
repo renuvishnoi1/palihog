@@ -46,9 +46,10 @@ class ShopController extends Controller
        //dd($shop);
          $this->validate($request,[
          'shop_name'=>'required',
-         'phone'=>'required|numeric|digits:10',
+         'phone'=>'required|numeric|digits:10|min:0|not_in:0',
          'shop_address'=>'required',
-         'shop_branch'=>'required'
+         'shop_branch'=>'required',
+         'category_id'=>'required',
          ]);
          $shop['shop_name'] = $request->shop_name;
          $shop['phone'] = $request->phone;
@@ -100,7 +101,7 @@ class ShopController extends Controller
         $shop = Shop::find($id);
          $this->validate($request,[
          'shop_name'=>'required',
-         'phone'=>'required|numeric|digits:10',
+         'phone'=>'required|numeric|digits:10|min:0|not_in:0',
          'shop_address'=>'required',
          'shop_branch'=>'required'
          ]);

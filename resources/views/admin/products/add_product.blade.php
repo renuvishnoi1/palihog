@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Add Shop')
+@section('title', 'Add Product')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Shop</h1>
+            <h1>Add Product</h1>
           </div>
           <div class="col-sm-6">
            <!--  <ol class="breadcrumb float-sm-right">
@@ -43,14 +43,11 @@
              <div class="form-group">
                   <label>Category</label>
                 <select name="category_id" class="form-control">
-                  <option value="">Please Select</option>
                    @foreach($category as $cat)
                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                    @endforeach
                 </select>
-                 @if ($errors->has('category_id'))
-                    <span class="text-danger">{{ $errors->first('category_id') }}</span>
-                @endif 
+                
                 </div>
                 <div class="form-group">
                   <label>Shop Name</label>

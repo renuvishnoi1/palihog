@@ -67,8 +67,8 @@ class AboutUsController extends Controller
      */
     public function edit($id)
     {
-        $aboutus= AboutUs::find($id);
-        return view('admin.privacy.edit_aboutus')->with(compact('aboutus'));
+        $about= AboutUs::find($id);
+        return view('admin.aboutus.edit_aboutus')->with(compact('about'));
     }
 
     /**

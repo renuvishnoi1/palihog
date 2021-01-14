@@ -63,7 +63,7 @@
           </div>
                                                             
              <div class="reset-button">
-               <input type="submit" name="" class="btn btn-success" value="Edit Brand">
+               <input type="submit" name="" class="btn btn-success" value="Submit">
                                  
                 </div>
                </form>

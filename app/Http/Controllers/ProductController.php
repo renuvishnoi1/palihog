@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -14,8 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product= Product::all();
-        return view('admin.products.view_products')>with(compact('product'));
+        $data= Product::all();
+        return view('admin.products.view_products')->with(compact('data'));
     }
 
     /**
@@ -25,7 +27,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category= Category::all();
+        //dd($category);
+        $brand = Brand::all();
+
+        return view('admin.products.add_product')->with(compact('category','brand'));
     }
 
     /**

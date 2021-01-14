@@ -8,9 +8,22 @@ use App\Models\Users;
 use Validator;
 use Str;
 use Hash;
-
+use DB;
 class UserApiController extends Controller
 {
+   public function __construct()
+    {
+        
+        $token = @$_SERVER['HTTP_AUTHORIZATION'];
+        $user_details=DB::table('user_login')->where('auth_key',$token)->first();
+ //dd($token);
+        if($user_details!=''){
+            $this->hasUser = $user_details;
+        }else{
+            $this->hasUser = '';
+        }
+    }
+
     //
     public function register(Request $request){
        $validator= Validator::make($request->all(),[
@@ -18,7 +31,7 @@ class UserApiController extends Controller
         'last_name'=>'required',
        	'email'=>'required|email|unique:user_login',
        	'password'=>'required|min:6',
-        	'phone_number'=>'required|numeric|digits:10',
+        'phone_number'=>'required|numeric|digits:10',
         'device_name'=>'required'
        ]);
        if( $validator->fails()){
@@ -28,32 +41,31 @@ class UserApiController extends Controller
         "message" =>$validator->errors()
         ],202);
        }
+       $data = array();
+       $auth_key=bin2hex(random_bytes(300));
+
        $input = $request->all();
 
-       $input['password']=bcrypt($input['password']);
-       $input['token'] = Str::random(10);
-       $user= Users::create($input);
+      $data['first_name']=$input['first_name'];
+      $data['last_name']=$input['last_name'];
+      $data['email']=$input['email'];
+      $data['phone_number']=$input['phone_number'];
+      $data['device_name']=$input['device_name'];
+       $data['password']=bcrypt($input['password']);
+       //$data['token'] = Str::random(10);
+        $data['auth_key']=$auth_key;
+        $data['firebase_token'] = $input['firebase_token'];
+  //dd($data);
+       $user= Users::create($data);
        $reponseArray=[];      
-      // $reponseArray['first_name']=$user->name;
+      
        return response()->json([
         "Status" => "success",
         "message" => "User Registered Successfully",
         "data" =>  $user
         ],200);
     }
-    // public function login(Request $request){
-    //  // dd($request);
-    //     $data= Users::where(['email'=>$request->email,'password'=>$request->password])->get();
-
-    //    dd($data);
-    // 	if(count($data)){
-           
-    //    return response()->json($data,200);
-    // 	}else{
-    // 		 return response()->json(['error'=>'Unauthorized'],203);
-    // 	}
-
-    // }
+   
     public function login (Request $request) {
     $validator = Validator::make($request->all(), [
         'email' => 'required|string|email|max:255',
@@ -62,24 +74,55 @@ class UserApiController extends Controller
     if ($validator->fails())
     {
         return response(['errors'=>$validator->errors()->all()], 422);
-    }
+    }    
     $user = Users::where('email', $request->email)->first();
     if ($user) {
         if (Hash::check($request->password, $user->password)) {
             $token = $user->token;
+            $user->firebase_token=$request->firebase_token;
+            $user->save();
+
+            $success=array(
+                'data'=>$user,
+                'status'=>1,
+                'error'=>0,
+                'message'=>'Login Successfully',
+              );
             $response = ['token' => $token];
-            return response($response, 200);
+            return response($success, 200);
         } else {
-            $response = ["message" => "Password mismatch"];
-            return response($response, 422);
+           $success=array(
+                'data'=>'',
+                'status'=>0,
+                'error'=>1,
+                'message'=>'Password mismatch',
+              );
+            
+            return response()->json($success, 422);
         }
     } else {
-        $response = ["message" =>'User does not exist'];
-        return response($response, 422);
+      $success=array(
+                'data'=>'',
+                'status'=>0,
+                'error'=>1,
+                'message'=>'User does not exist',
+              );
+        
+        return response()->json($success, 422);
     }
 }
     public function categoryList(Request $request){
     	
 
     }
+     public function logout(){
+
+    if($res=$this->hasUser){
+      $data=array('auth_key'=>'');
+     DB::table('user_login')->where('id', $res->id)->update($data);
+      echo json_encode(array('status'=>'Success','Message'=>'Logout Successfully'));
+    }else{
+       echo json_encode(array('status'=>'error','Message'=>'Invalid Authentication key','data'=>'Not Found'));
+    }
+   }
 }

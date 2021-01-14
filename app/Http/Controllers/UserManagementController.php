@@ -44,7 +44,7 @@ class UserManagementController extends Controller
          'email'=>'required|email|unique:users',
          'password'=>'required|min:6',
          'c_password'=>'required|same:password',        
-         'phone_number'=>'required|numeric|digits:10',
+         'phone_number'=>'required|numeric|digits:10|min:0|not_in:0',
          
          ]);
          $user->first_name = $request['first_name'];
@@ -96,8 +96,7 @@ class UserManagementController extends Controller
          'first_name'=>'required',
          'last_name'=>'required',
          'email'=>'required|email',  
-          'phone_number'=>'required|numeric|digits:10',
-         
+         'phone_number'=>'required|numeric|digits:10|min:0|not_in:0',         
          ]);
          $user->first_name = $request['first_name'];
          $user->last_name = $request['last_name'];

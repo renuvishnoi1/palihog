@@ -26,9 +26,8 @@ class CreatePickupDropoffTable extends Migration
             $table->string('item_description');
             $table->string('dropoff_address');
             $table->string('dropoff_location');
-            $able->string('dropoff_phone_number');
+            $table->string('dropoff_phone_number');
             $table->integer('status')->default(1);
-
             $table->timestamps();
         });
     }

@@ -55,11 +55,20 @@
               </p>
             </a>
           </li>
+
            <li class="nav-item">
             <a href="{{ route('shops.index') }}" class="nav-link {{ Request::is('shops*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Shops               
+              </p>
+            </a>
+          </li> 
+           <li class="nav-item">
+            <a href="{{ route('products.index') }}" class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               Products               
               </p>
             </a>
           </li> 

@@ -20,6 +20,7 @@ class CreateVehicleTable extends Migration
             $table->string('vehicle_type')->nullable();
             $table->string('weight_charge')->nullable();
             $table->string('distance_charge')->nullable();
+            $table->srting('price')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

@@ -9,5 +9,5 @@ class Users extends Model
 {
     use HasFactory;
     protected $table = 'user_login';
-    protected $fillable = ['first_name','last_name','email','password','phone_number','device_name','token','status']; 
+    protected $fillable = ['first_name','last_name','email','password','phone_number','device_name','token','auth_key','firebase_token','login_type','user_type','lat','long','status']; 
 }

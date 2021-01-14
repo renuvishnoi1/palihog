@@ -47,13 +47,13 @@
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $banner)
+                    @foreach($data as $product)
                   <tr>
-                    <td>{{ $banner->heading }}</td>
-                    <td>{{ $banner->sub_heading }}</td>                    
-                    <td><img src="{{ asset('uploads/banner/'.$banner->banner_image) }}" alt="" width="50" height="50"></td>
+                    <td>{{ $productr->name }}</td>
+                    <td>{{ $productr->sub_heading }}</td>                    
+                    <td><img src="{{ asset('uploads/banner/'.$productr->banner_image) }}" alt="" width="50" height="50"></td>
                     
-                    <?php if($banner->status =='1'){
+                    <?php if($productr->status =='1'){
                       $status='Active';
 
                     }else{
@@ -63,12 +63,12 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('banners.destroy', $banner->id) }}" method="POST">
-                       <!--  <a href="{{ route('banners.show', $banner->id) }}" title="show">
+                       <form action="{{ route('banners.destroy', $productr->id) }}" method="POST">
+                       <!--  <a href="{{ route('banners.show', $productr->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('banners.edit', $banner->id) }}">
+                        <a href="{{ route('banners.edit', $productr->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -88,9 +88,9 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Heading</th>
-                    <th>Sub Heading</th>                   
-                    <th>Banner Image</th>
+                   <th>Product Name</th>
+                    <th>Code</th>                   
+                    <th>Price</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
