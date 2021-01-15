@@ -17,6 +17,7 @@ use App\Models\Merchant;
 use App\Models\Vehicle;
 use App\Models\PickupDropoff;
 use App\Models\SendQuery;
+use DB;
 use Validator;
 
 class ApiController extends Controller
@@ -266,4 +267,41 @@ class ApiController extends Controller
         ],200);
 
     }
+    //
+    public function PickDropAmount(Request $request){
+
+     $lat1= $request->lat1;
+     $lon1= $request->lon1;
+     $lat2= $request->lat2;
+     $lon2= $request->lon2;
+     $distance = $this->getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2);
+     $vehicle_id = $request->vehicle_id;
+     $weight = $request->weight;
+     $vehicle = Vehicle::where('id',$vehicle_id)->first();
+     $vehicle_range = DB::table('vehicle_price_distance')->where('vehicle_id',$vehicle_id)->first();
+    dd($vehicle_range);
+     if($distance <= $vehicle->distance_charge ){
+      
+      if( $weight <= $vehicle->weight_charge){
+        dd("yes");
+      }
+     }else{
+      dd('hi');
+     }
+
+
+    }
+    function getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2) {
+      
+    $theta = $lon1 - $lon2;
+    $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+    $miles = acos($miles);
+    $miles = rad2deg($miles);
+    $miles = $miles * 60 * 1.1515;
+    $feet = $miles * 5280;
+    $yards = $feet / 3;
+    $kilometers = $miles * 1.609344;
+    $meters = $kilometers * 1000;
+    return compact('miles','feet','yards','kilometers','meters'); 
+  }
 }

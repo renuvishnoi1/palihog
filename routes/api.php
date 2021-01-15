@@ -42,4 +42,5 @@ Route::get('/vehicle_list/', [App\Http\Controllers\ApiController::class,'vehiclL
 Route::post('/productlist', [App\Http\Controllers\ApiController::class,'productListByCategory'])->name('productlist');
 Route::post('/pickup_dropoff', [App\Http\Controllers\ApiController::class,'pickUpDropOff'])->name('pickup_dropoff');
 Route::post('/write_to_us', [App\Http\Controllers\ApiController::class,'writeToUs'])->name('write_to_us');
+Route::post('/pick_drop_amount', [App\Http\Controllers\ApiController::class,'PickDropAmount'])->name('pick_drop_amount');
 

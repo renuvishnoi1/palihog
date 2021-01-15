@@ -40,8 +40,12 @@
                   <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Type</th>          
+                    <th>Type</th>
+
                     <th>Image</th>
+                    <th>Distance</th> 
+                    <th>Weight</th>
+                    <th>Price</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
@@ -52,6 +56,9 @@
                     <td>{{ $vehicle->name }}</td>
                     <td>{{ $vehicle->vehicle_type }}</td>                    
                     <td><img src="{{ $vehicle->image }}" alt="" width="50" height="50"></td>
+                    <td>{{ $vehicle->distance_charge }}</td>
+                    <td>{{ $vehicle->weight_charge }}</td>
+                    <td>{{ $vehicle->price }}</td>
                     
                     <?php if($vehicle->status =='1'){
                       $status='Active';
@@ -91,6 +98,9 @@
                    <th>Name</th>
                       <th>Type</th>                   
                     <th> Image</th>
+                    <th>Distance</th> 
+                    <th>Weight</th>
+                    <th>Price</th>
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>

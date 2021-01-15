@@ -66,7 +66,7 @@
                               </div>
                               <div class="form-group">
                                  <label>Category Description</label>
-                                 <textarea name="description" class="form-control" id="category_description" cols="30" rows="10"></textarea>
+                                 <textarea name="description" class="form-control" id="category_description" cols="30" rows="10">{{ $val->description}}</textarea>
                               </div>
                               
                                                             
