@@ -274,19 +274,18 @@ class ApiController extends Controller
      $lon1= $request->lon1;
      $lat2= $request->lat2;
      $lon2= $request->lon2;
-     $distance = $this->getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2);
+     $distance = $this->getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2);     
+     $km = round($distance['kilometers']);
+     dd($km);
      $vehicle_id = $request->vehicle_id;
-     $weight = $request->weight;
+     // $weight = $request->weight;
      $vehicle = Vehicle::where('id',$vehicle_id)->first();
-     $vehicle_range = DB::table('vehicle_price_distance')->where('vehicle_id',$vehicle_id)->first();
-    dd($vehicle_range);
-     if($distance <= $vehicle->distance_charge ){
-      
-      if( $weight <= $vehicle->weight_charge){
-        dd("yes");
-      }
+     //$vehicle_range = DB::table('vehicle_price_distance')->where('vehicle_id',$vehicle_id)->first();
+      //dd($vehicle);
+     if(($km > $vehicle->distance_from) && ($km < $vehicle->distance_to)){
+       
      }else{
-      dd('hi');
+      
      }
 
 

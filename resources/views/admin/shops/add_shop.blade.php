@@ -51,20 +51,23 @@
                  @if ($errors->has('category_id'))
                     <span class="text-danger">{{ $errors->first('category_id') }}</span>
                 @endif 
+
                 </div>
                 <div class="form-group">
                   <label>Shop Name</label>
                 <input type="text" name="shop_name" id="shop_name" class="form-control" placeholder="Enter Shop Name" >
-                 @if ($errors->has('shop_name'))
-                    <span class="text-danger">{{ $errors->first('shop_name') }}</span>
-                @endif  
+                 @error('shop_name')
+                 <div class="text text-danger">{{ $message }}</div>
+                  @enderror 
                 </div>
               <div class="form-group">                 
                  <label>Phone Number </label>                
                 <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">   
-                @if ($errors->has('phone'))
-                    <span class="text-danger">{{ $errors->first('phone') }}</span>
-                @endif                      
+               
+                @error('phone')
+                 <div class="text text-danger">{{ $message }}</div>
+                  @enderror
+
                </div>
                
                <div class="form-group">                

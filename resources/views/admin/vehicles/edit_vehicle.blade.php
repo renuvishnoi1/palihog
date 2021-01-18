@@ -42,33 +42,48 @@
             @method('PATCH')
           <div class="form-group">
               <label>Name</label>
-              <input type="text" name="name"  class="form-control" value="{{ $vehicle->name }}" placeholder="Enter Vehicle Name" >
+              <input type="text" name="name"  class="form-control" value="{{ $vehicle->name }}" >
+            @error('name')
+           <div class="text text-danger">{{ $message }}</div>
+            @enderror
               </div>
-            <div class="form-group">
-              <label>Vehicle Type</label>
-              <select class="form-control" name="type">
-              <option value="two wheeler"  <?php if ($vehicle->vehicle_type == 'two wheeler') { echo 'selected'; }?>>two wheeler</option>
-              <option value="three wheeler"  <?php if ($vehicle->vehicle_type == 'three wheeler') { echo 'selected'; }?>>three wheeler</option>
-              <option value="four wheeler"  <?php if ($vehicle->vehicle_type == 'four wheeler') { echo 'selected'; }?>>four wheeler</option>
-            </div>
-          </select>            
+                <div class="form-group">
+             <label>Vehicle Type</label>
+            <select class="form-control" name="vehicle_type">
+              @foreach($vehicle_type as $type)
+              <option value="{{ $type->id }}" >{{ $type->vehicle_type }}</option>
+              @endforeach
+            </select>
+          </div>      
             <div class="form-group">
             <label>Image</label>
           <input type="file" name="image" id="image" class="form-control" >
+
             </div>
           <div class="form-group">
-            <label>Distance</label>
-            <input type="text" name="distance_charge"  class="form-control" placeholder="Enter Distance " value="{{ $vehicle->distance_charge }}">
+            <label>Distance From</label>
+            <input type="text" name="distance_from"  class="form-control"  value="{{ $vehicle->distance_from }}" >
+            @error('distance_from')
+           <div class="text text-danger">{{ $message }}</div>
+            @enderror
             
           </div>
           <div class="form-group">
-            <label>Weight</label>
-            <input type="text" name="weight_charge"  class="form-control" placeholder="Enter Weight" value="{{ $vehicle->weight_charge }}">
+            <label>Distance To</label>
+            <input type="text" name="distance_to"  class="form-control" value="{{ $vehicle->distance_to }}" > 
+             @error('distance_to')
+           <div class="text text-danger">{{ $message }}</div>
+            @enderror           
           </div>
+         
+         
           <div class="form-group">
             <label>Price</label>
-            <input type="text" name="price"  class="form-control" placeholder="Enter Price" value="{{ $vehicle->price }}">
-          </div>
+            <input type="text" name="price"  class="form-control" value="{{ $vehicle->price }}" >
+            @error('price')
+           <div class="text text-danger">{{ $message }}</div>
+            @enderror
+          </div>           
             <div class="form-group">              
                  <label>Status</label>
                  <select class="form-control" name="status">

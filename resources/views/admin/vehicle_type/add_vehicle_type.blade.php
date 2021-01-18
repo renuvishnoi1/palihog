@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Edit Brand')
+@section('title', 'Add Type')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Brand</h1>
+            <h1>Add Type</h1>
           </div>
           <div class="col-sm-6">
            <!--  <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Edit Brand</h3>
+            <h3 class="card-title">Add Type</h3>
            
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -36,41 +36,30 @@
               </button>
             </div>
           </div>
-          <!-- /.card-header -->
-           
-                <div class="panel-body">
-         <form action="{{ route('brands.update', $brand->id) }}" method="POST">
+          <!-- /.card-header -->          
+          <div class="panel-body">
+         <form action="{{ route('vehicle_types.store')}}" method="POST" >
             @csrf
-            @method('PATCH')
-            <div class="form-group">
-              
-                 <label>Brand Name</label>
-                 <input type="text" name="brand_name" class="form-control" value="{{ $brand->brand_name}}">     
-                   @error('brand_name')
+          <div class="form-group">
+              <label>Type</label>
+             <input type="text" name="vehicle_type" id="vehicle_type" class="form-control" placeholder="Enter Vehicle Type" >
+              @error('vehicle_type')
                  <div class="text text-danger">{{ $message }}</div>
                   @enderror
-              
-              </div>
-              <div class="form-group">
-                                 <label>Image</label>
-                                 <input type="file" name="image" id="image" class="form-control" >
-                              </div> 
-              <div class="form-group">
-              
-                 <label>Status</label>
-                 <select class="form-control" name="status">
-                   <option value="1" <?php if ($brand->status == '1') { echo 'selected'; }?> >Active</option>
-                   <option value="0" <?php if ($brand->status == '0') { echo 'selected'; }?> >Inactive</option>
-                 </select>
-               
-          </div>
-           <div class="form-group">
-              <div class="col-md-6">
-             <button type="submit" class="btn btn-primary">Submit</button>
-               </div>   
-            </div>
-           </form>
+
+               </div>
+                             
+                <div class="form-group">
+                <label>Weight</label>
+                <input type="text" name="weight" id="weight" class="form-control" placeholder="Enter Weight" >
+                  </div>                          
+                 <div class="submit-button">
+                  <input type="submit" name="" class="btn btn-success" value="Add Type">
+                                 
+                              </div>
+                           </form>
          </div>
+
           <!-- /.card-body -->
           <div class="card-footer">
           

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Vehicle List')
+@section('title', 'Type List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Vehicle</h1>
+            <h1>Type</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -23,6 +23,7 @@
     </div>
 @endif
     </section>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -30,8 +31,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('vehicles.create')}}" class="btn btn-success">Add Vehicle</a>
+                <a href="{{ route('vehicle_types.create')}}" class="btn btn-success">Add Type</a>
                 <a href=""></a>
+
               </div>
 
               <!-- /.card-header -->
@@ -39,40 +41,24 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Image</th>
-                    <th>Distance</th>                     
-                    <th>Price</th>
-                    <th>Status</th>                    
+                    <th>Vehicle Type</th>
+                    <th>Weight</th>         
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $vehicle)
+                    @foreach($data as $type)
                   <tr>
-                    <td>{{ $vehicle->name }}</td>
-                    <td>{{ $vehicle->vehicle_type }}</td>                    
-                    <td><img src="{{ $vehicle->image }}" alt="" width="50" height="50"></td>
-                    <td>{{ $vehicle->distance_from }} to {{ $vehicle->distance_to }}</td>                    
-                    <td>{{ $vehicle->price }}</td>
-                    
-                    <?php if($vehicle->status =='1'){
-                      $status='Active';
+                    <td>{{ $type->vehicle_type }}</td>
+                 <td>{{ $type->weight }}</td>
+                    <td>
+                       <form action="{{ route('vehicle_types.destroy', $type->id) }}" method="POST">
 
-                    }else{
-                      $status='Inactive';
-                    }?>
-                    <td>
-                      {{ $status }}
-                    </td>
-                    <td>
-                       <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST">
-                       <!--  <a href="{{ route('vehicles.show', $vehicle->id) }}" title="show">
+                       <!--  <a href="{{ route('vehicle_types.show', $type->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a> -->
 
-                        <a href="{{ route('vehicles.edit', $vehicle->id) }}">
+                        <a href="{{ route('vehicle_types.edit', $type->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
@@ -92,13 +78,8 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Name</th>
-                      <th>Type</th>                   
-                    <th> Image</th>
-                    <th>Distance</th> 
-                    <th>Weight</th>
-                    <th>Price</th>
-                    <th>Status</th>                    
+                    <th>Vehicle Type</th>  
+                     <th>Weight</th>                  
                     <th>Action</th>
                   </tr>
                   </tfoot>

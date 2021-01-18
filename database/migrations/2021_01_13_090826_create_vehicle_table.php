@@ -17,9 +17,7 @@ class CreateVehicleTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('image')->nullable();
-            $table->string('vehicle_type')->nullable();
-            $table->string('weight_from')->nullable();
-            $table->string('weight_to')->nullable();
+            $table->integer('vehicle_type_id')->nullable();
             $table->string('distance_from')->nullable();
             $table->string('distance_to')->nullable();
             $table->string('price')->nullable();

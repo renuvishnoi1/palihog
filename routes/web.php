@@ -33,3 +33,4 @@ Route::resource('/products', App\Http\Controllers\ProductController::class);
 Route::resource('/privacy', App\Http\Controllers\PrivacyPolicyController::class);
 Route::resource('/aboutus', App\Http\Controllers\AboutUsController::class);
 Route::resource('/vehicles', App\Http\Controllers\VehicleController::class);
+Route::resource('/vehicle_types', App\Http\Controllers\VehicleTypeController::class);

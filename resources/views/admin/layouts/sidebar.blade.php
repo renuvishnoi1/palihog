@@ -109,6 +109,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('vehicle_types.index') }}" class="nav-link {{ Request::is('vehicle_types*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vehicle Type</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('vehicles.index') }}" class="nav-link {{ Request::is('vehicles*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vehicles</p>

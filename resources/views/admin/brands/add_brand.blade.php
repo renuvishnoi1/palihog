@@ -41,15 +41,19 @@
          <form action="{{ route('brands.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="form-group">
-                                 <label>Brand Name</label>
-                                 <input type="text" name="brand_name" id="brand_name" class="form-control" placeholder="Enter Brand Name" required>
-                              </div>
+              <label>Brand Name</label>
+             <input type="text" name="brand_name" id="brand_name" class="form-control" placeholder="Enter Brand Name" >
+              @error('brand_name')
+                 <div class="text text-danger">{{ $message }}</div>
+                  @enderror
+
+               </div>
                              
-                              <div class="form-group">
-                                 <label>Image</label>
-                                 <input type="file" name="image" id="image" class="form-control" >
-                              </div>                          
-                              <div class="form-group">
+                <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="image" id="image" class="form-control" >
+                  </div>                          
+                 <div class="form-group">
               
                  <label>Status</label>
                  <select class="form-control" name="status">
