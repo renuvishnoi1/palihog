@@ -270,25 +270,38 @@ class ApiController extends Controller
     //
     public function PickDropAmount(Request $request){
 
-     $lat1= $request->lat1;
-     $lon1= $request->lon1;
-     $lat2= $request->lat2;
-     $lon2= $request->lon2;
+     $lat1 = $request->lat1;
+     $lon1 = $request->lon1;
+     $lat2 = $request->lat2;
+     $lon2 = $request->lon2;
      $distance = $this->getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2);     
      $km = round($distance['kilometers']);
-     dd($km);
-     $vehicle_id = $request->vehicle_id;
-     // $weight = $request->weight;
-     $vehicle = Vehicle::where('id',$vehicle_id)->first();
-     //$vehicle_range = DB::table('vehicle_price_distance')->where('vehicle_id',$vehicle_id)->first();
-      //dd($vehicle);
-     if(($km > $vehicle->distance_from) && ($km < $vehicle->distance_to)){
-       
-     }else{
-      
+     //dd($km);
+     $vehicle_id = $request->vehicle_id;     
+    $sum = $this->get_amount($km,$vehicle_id);
+
+    $next = DB::table('vehicle')
+    ->orWhere(function($query) use ($km) {
+                        $query->where('distance_from','>=',$km)
+                            ->where('distance_to','<=',$km);
+             })
+    ->where('id',$vehicle_id)
+    ->get();
+
+    //dd($next);
+    }
+    function get_amount($km,$vehicle_id){
+       $vehicle = Vehicle::where('id', $vehicle_id)
+                        ->where('distance_to','<=',$km)
+                        ->get();      
+        
+     //dd($vehicle);
+     $sum = 0;
+     foreach($vehicle as $val) {
+       $sum +=($val->distance_to-$val->distance_from)*$val->price;
      }
-
-
+     //echo $sum;
+     return $sum;
     }
     function getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2) {
       
@@ -303,4 +316,14 @@ class ApiController extends Controller
     $meters = $kilometers * 1000;
     return compact('miles','feet','yards','kilometers','meters'); 
   }
+  // public function getPrice(){
+  //   $kms = 10;
+  //   $price_1 = ($kms > 0) ? 3 : 0; $kms =  ($kms > 0)? $kms - 1 :  0;
+  //   $price_2 = ($kms - 14) > 0 ? (14 * 1.60) : ($kms * 1.60); $kms = ($kms-14)>0 ? $kms - 14 : 0;
+  //   $price_3 = ($kms - 15) > 0 ? (15 * 1.40) l: ($kms * 1.40); $kms = ($kms-15)>0 ? $kms - 15 : 0;
+  //   $price_4 = ($kms > 0) ? ($kms * 1.20) : 0;
+  //   $total_fare=$price_1 + $price_2 + $price_3 + $price_4;
+  //   echo $total_fare;
+
+  // }
 }

@@ -43,4 +43,5 @@ Route::post('/productlist', [App\Http\Controllers\ApiController::class,'productL
 Route::post('/pickup_dropoff', [App\Http\Controllers\ApiController::class,'pickUpDropOff'])->name('pickup_dropoff');
 Route::post('/write_to_us', [App\Http\Controllers\ApiController::class,'writeToUs'])->name('write_to_us');
 Route::post('/pick_drop_amount', [App\Http\Controllers\ApiController::class,'PickDropAmount'])->name('pick_drop_amount');
+Route::get('/get_amount', [App\Http\Controllers\ApiController::class,'get_amount']);
 
