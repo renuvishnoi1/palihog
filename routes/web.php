@@ -34,3 +34,4 @@ Route::resource('/privacy', App\Http\Controllers\PrivacyPolicyController::class)
 Route::resource('/aboutus', App\Http\Controllers\AboutUsController::class);
 Route::resource('/vehicles', App\Http\Controllers\VehicleController::class);
 Route::resource('/vehicle_types', App\Http\Controllers\VehicleTypeController::class);
+Route::resource('/pick_drop', App\Http\Controllers\PickupDropoffController::class);

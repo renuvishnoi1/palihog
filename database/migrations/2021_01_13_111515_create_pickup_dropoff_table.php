@@ -17,6 +17,7 @@ class CreatePickupDropoffTable extends Migration
             $table->increments('id');
             $table->integer('vehicle_id');
             $table->integer('category_id');
+            $table->integer('user_id');
             $table->string('weight');
             $table->string('pickup_address');
             $table->string('amount');

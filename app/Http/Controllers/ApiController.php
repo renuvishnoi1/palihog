@@ -211,11 +211,12 @@ class ApiController extends Controller
       $validator= Validator::make($request->all(),[
         'category_id'=>'required',
         'vehicle_id'=>'required',
+        'user_id'=>'required',
         'weight'=>'required',
         'pickup_address'=>'required',
         'amount'=>'required',
         'pickup_phone_number'=>'required',
-        'pick_up_date'=>'required',
+        'pick_up_date'=>'required|date_format:Y-m-d',
         'pickup_time'=>'required',
         'item_description' =>'required',
         'dropoff_address' =>'required',
@@ -223,10 +224,15 @@ class ApiController extends Controller
         'dropoff_phone_number' => 'required',        
        ]);
       if( $validator->fails()){
-        return response()->json($validator->errors(),202);
+       return response()->json([
+        "status" => false,       
+        "message" =>$validator->errors()
+        ],202);
+        //return response()->json($validator->errors(),202);
        }
        $pickup['category_id'] = $request->category_id;
        $pickup['vehicle_id'] = $request->vehicle_id;
+       $pickup['user_id'] = $request->user_id;
        $pickup['weight'] = $request->weight;
        $pickup['pickup_address'] = $request->pickup_address;
        $pickup['amount'] = $request->amount;
@@ -238,11 +244,14 @@ class ApiController extends Controller
        $pickup['dropoff_location'] = $request->dropoff_location;
        $pickup['dropoff_phone_number'] = $request->dropoff_phone_number;
        $pickup->save();
+      //dd($pickup->amount);
         return response()->json([
         "success" => true,
         "message" => "Data saved ",
         "data" => $pickup
         ],200);
+    
+        
          
     }
     public function writeToUs(Request $request){
@@ -267,7 +276,7 @@ class ApiController extends Controller
         ],200);
 
     }
-    //
+    // pick drop amount
     public function PickDropAmount(Request $request){
 
      $lat1 = $request->lat1;
@@ -275,34 +284,38 @@ class ApiController extends Controller
      $lat2 = $request->lat2;
      $lon2 = $request->lon2;
      $distance = $this->getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2);     
-     $km = round($distance['kilometers']);
-     //dd($km);
-     $vehicle_id = $request->vehicle_id;     
-    $sum = $this->get_amount($km,$vehicle_id);
+     $kmm = round($distance['kilometers']);
 
-    $next = DB::table('vehicle')
-    ->orWhere(function($query) use ($km) {
-                        $query->where('distance_from','>=',$km)
-                            ->where('distance_to','<=',$km);
-             })
-    ->where('id',$vehicle_id)
-    ->get();
-
-    //dd($next);
+     $km = (int)$kmm;
+     $vehicle_type_id = $request->vehicle_type_id; 
+   
+       $sum = $this->get_amount($km,$vehicle_type_id);
+      //return $sum;
+       return response()->json([
+        "success" => true,
+        "message" => "",
+        "price" => $sum
+        ],200);
+    
     }
-    function get_amount($km,$vehicle_id){
-       $vehicle = Vehicle::where('id', $vehicle_id)
+// find amount according distance
+    function get_amount($km,$vehicle_type_id){
+       $vehicle = Vehicle::where('vehicle_type_id', $vehicle_type_id)
                         ->where('distance_to','<=',$km)
-                        ->get();      
-        
+                        ->get(); 
      //dd($vehicle);
      $sum = 0;
      foreach($vehicle as $val) {
        $sum +=($val->distance_to-$val->distance_from)*$val->price;
      }
-     //echo $sum;
-     return $sum;
+      $next = DB::table('vehicle')
+    ->where('distance_from','<=',$km)->where('distance_to','>=',$km)
+    ->where('vehicle_type_id', $vehicle_type_id)
+    ->first();
+     $amount =  ($km - $next->distance_from )*$next->price;
+     return $sum + $amount;
     }
+    // find distance from lat long
     function getDistanceBetweenPoints($lat1, $lon1, $lat2, $lon2) {
       
     $theta = $lon1 - $lon2;

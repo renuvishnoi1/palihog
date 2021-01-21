@@ -62,7 +62,7 @@ class VehicleController extends Controller
         $vehicle['price'] = $request->price;
          $vehicle['status'] = $request->status;
            if($request->hasfile('image')){
-                echo $img_temp= $request['image'];
+                //echo $img_temp= $request['image'];
                 if($img_temp->isValid()){
                 // image path code
                 $extension = $img_temp->getClientOriginalExtension();
