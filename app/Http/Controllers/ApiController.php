@@ -26,9 +26,7 @@ class ApiController extends Controller
     
     public function brandList(Request $request){
       $brand = Brand::all();
-        //dd($brand);
-
-      	//echo "string";
+        
       	return response()->json($brand,200);  
            
     }
@@ -38,8 +36,6 @@ class ApiController extends Controller
      return response()->json($order,200);  
     }
     
-  
-   
 
     /***food drink api list date(12-jan)**/
    
@@ -106,7 +102,7 @@ class ApiController extends Controller
        
        $category= Category::where(['parent_id'=>0])->get();       
         return response()->json([
-        "success" => true,
+        "success" => "1",
         "message" => "Category List",
         "data" => $category
         ],200);             
@@ -121,7 +117,7 @@ class ApiController extends Controller
        }
        $category= Category::where('parent_id',$request->category_id)->get();
        return response()->json([
-        "success" => true,
+        "success" => "1",
         "message" => "Sub Category List",
         "data" => $category
         ],200);     
@@ -168,14 +164,17 @@ class ApiController extends Controller
         "message" => "order placed"
     ],200);
     }
-   public function productListByCategory(Request $request){
+   public function ShopProductListByCategory(Request $request){
      $validator= Validator::make($request->all(),[
-        'category_id'=>'required'
+        'category_id'=>'required',
+        'subcategory_id'=>'required',
+        'brand_id'=>'required',        
        ]);
          if( $validator->fails()){
         return response()->json($validator->errors(),202);
        }
-       $product= Product::where(['category_id'=>$request->category_id])->get();
+       $product = Product::where(['category_id'=>$request->category_id,'subcategory_id'=>$request->subcategory_id,'brand_id'=>$request->brand_id])->get();
+       
        return response()->json([
         "success" => true,
         "message" => "Product List",

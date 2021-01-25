@@ -56,14 +56,14 @@
             </a>
           </li>
 
-           <li class="nav-item">
+         <!--   <li class="nav-item">
             <a href="{{ route('shops.index') }}" class="nav-link {{ Request::is('shops*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Shops               
               </p>
             </a>
-          </li> 
+          </li> --> 
            <li class="nav-item">
             <a href="{{ route('products.index') }}" class="nav-link {{ Request::is('products*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
@@ -122,6 +122,37 @@
               </li>
              
             </ul>
+          
+          </li>
+             <li class="nav-item">
+            <a href="{{ route('pick_drop.index') }}" class="nav-link {{ Request::is('pick_drop*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               Order Details               
+              </p>
+            </a>
+          </li> 
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Shop
+                <i class="fas fa-angle-left right"></i>               
+              </p>
+            </a>
+            <ul class="nav nav-treeview">             
+              <li class="nav-item ">
+                <a href="{{ route('shop_category.index') }}" class="nav-link {{ Request::is('shop_category*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Shop Category</p>
+                </a>
+              </li>
+              
+           
+             
+            </ul>
+          
           </li>
           
         

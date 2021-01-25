@@ -27,11 +27,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category= Category::all();
+        $category= Category::where(['parent_id'=>0])->get();
         //dd($category);
+        foreach ($category as  $value) {
+            $sub_category = Category::where(['parent_id'=>$value->id])->get();
+        }
+        //dd($sub_category);
         $brand = Brand::all();
 
-        return view('admin.products.add_product')->with(compact('category','brand'));
+        return view('admin.products.add_product')->with(compact('category','brand','sub_category'));
     }
 
     /**
@@ -42,7 +46,40 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $this->validate($request,[
+         'product_name'=>'required',
+         'category_id'=>'required',
+         'subcategory_id'=>'required',
+         'brand_id'=>'required',
+         'pro_code'=>'required',
+         'price'=>'required',
+         'quantity'=>'required',
+         'pro_color'=>'required',
+                  
+         ]);
+         $product->pro_name= $request['product_name']; 
+         $product->category_id= $request['category_id']; 
+         $product->subcategory_id= $request['subcategory_id']; 
+         $product->brand_id= $request['brand_id']; 
+         $product->pro_code= $request['pro_code']; 
+         $product->price= $request['price']; 
+         $product->quantity= $request['quantity']; 
+         $product->pro_color= $request['pro_color']; 
+         $product->description= $request['description'];          
+         if($request->hasfile('image')){
+                echo $img_temp= $request['image'];
+                if($img_temp->isValid()){
+                // image path code
+                $extension = $img_temp->getClientOriginalExtension();
+                $filename= time().'.'.$extension;
+                $request['image']->move(public_path('uploads/product/'), $filename);
+                $product->image= $filename;
+            }    
+            }   
+        $product->status= $request['status'];
+        $product->save();         
+        return redirect('/products')->with('message', 'Product added successfully');
     }
 
     /**
@@ -64,7 +101,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $category= Category::where(['parent_id'=>0])->get();
+        
+        foreach ($category as  $value) {
+            $sub_category = Category::where(['parent_id'=>$value->id])->get();
+        }
+        
+        $brand = Brand::all();
+        return view('admin.products.edit_product')->with(compact('brand','sub_category','category','product'));
     }
 
     /**
@@ -76,7 +121,40 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $this->validate($request,[
+         'product_name'=>'required',
+         'category_id'=>'required',
+         'subcategory_id'=>'required',
+         'brand_id'=>'required',
+         'pro_code'=>'required',
+         'price'=>'required',
+         'quantity'=>'required',
+         'pro_color'=>'required',
+                  
+         ]);
+         $product->pro_name= $request['product_name']; 
+         $product->category_id= $request['category_id']; 
+         $product->subcategory_id= $request['subcategory_id']; 
+         $product->brand_id= $request['brand_id']; 
+         $product->pro_code= $request['pro_code']; 
+         $product->price= $request['price']; 
+         $product->quantity= $request['quantity']; 
+         $product->pro_color= $request['pro_color']; 
+         $product->description= $request['description'];          
+         if($request->hasfile('image')){
+                echo $img_temp= $request['image'];
+                if($img_temp->isValid()){
+                // image path code
+                $extension = $img_temp->getClientOriginalExtension();
+                $filename= time().'.'.$extension;
+                $request['image']->move(public_path('uploads/product/'), $filename);
+                $product->image= $filename;
+            }    
+            }   
+        $product->status= $request['status'];
+        $product->save();         
+        return redirect('/products')->with('message', 'Product updated successfully');
     }
 
     /**
@@ -87,6 +165,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $product = Product::find($id);
+         $product->delete();
+         return redirect('/products')->with('message', 'Product deleted successfully');
+
+         
     }
 }

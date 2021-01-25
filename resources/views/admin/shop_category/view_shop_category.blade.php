@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Product List')
+@section('title', 'Shop Category List')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Product</h1>
+            <h1>Shop Categories</h1>
           </div>
           <div class="col-sm-6">
          <!--    <ol class="breadcrumb float-sm-right">
@@ -23,6 +23,7 @@
     </div>
 @endif
     </section>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -30,8 +31,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('products.create')}}" class="btn btn-success">Add Product</a>
+                <a href="{{ route('shop_category.create')}}" class="btn btn-success">Add Shop Category</a>
                 <a href=""></a>
+
               </div>
 
               <!-- /.card-header -->
@@ -39,21 +41,18 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Product</th>
-                    <th>Code</th>                   
-                    <th>Price</th>
+                    <th>Shop Category</th>
+                  
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $product)
+                    @foreach($data as $category)
                   <tr>
-                    <td>{{ $product->pro_name }}</td>
-                    <td>{{ $product->pro_code }}</td>                    
-                    <td><img src="{{ asset('uploads/banner/'.$product->banner_image) }}" alt="" width="50" height="50"></td>
-                    
-                    <?php if($product->status =='1'){
+                    <td>{{ $category->name }}</td>
+                   
+                    <?php if($category->status =='1'){
                       $status='Active';
 
                     }else{
@@ -63,14 +62,14 @@
                       {{ $status }}
                     </td>
                     <td>
-                       <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                        <a href="{{ route('products.show', $product->id) }}" title="show">
+                       <form action="{{ route('shop_category.destroy', $category->id) }}" method="POST">
+
+                       <!--  <a href="{{ route('shop_category.show', $category->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
-                        </a>
+                        </a> -->
 
-                        <a href="{{ route('products.edit', $product->id) }}">
+                        <a href="{{ route('shop_category.edit', $category->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
-
                         </a>
 
                         @csrf
@@ -88,9 +87,8 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Product Name</th>
-                    <th>Code</th>                   
-                    <th>Price</th>
+                   <th>Shop Category</th>
+                  
                     <th>Status</th>                    
                     <th>Action</th>
                   </tr>

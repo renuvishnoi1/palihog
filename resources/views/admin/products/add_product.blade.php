@@ -25,7 +25,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Add Shop</h3>
+            <h3 class="card-title">Add Product</h3>
            
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -38,47 +38,87 @@
           </div>
           <!-- /.card-header -->
            <div class="panel-body">
-         <form action="{{ route('shops.store')}}" method="POST">
+         <form action="{{ route('products.store')}}" method="POST">
             @csrf
              <div class="form-group">
                   <label>Category</label>
                 <select name="category_id" class="form-control">
+                  <option value="0">Select Category</option>
                    @foreach($category as $cat)
                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                    @endforeach
                 </select>
-                
+               @if ($errors->has('category_id'))
+                    <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                @endif 
                 </div>
                 <div class="form-group">
-                  <label>Shop Name</label>
-                <input type="text" name="shop_name" id="shop_name" class="form-control" placeholder="Enter Shop Name" >
-                 @if ($errors->has('shop_name'))
-                    <span class="text-danger">{{ $errors->first('shop_name') }}</span>
+                  <label>Sub Category</label>
+                <select name="subcategory_id" class="form-control">
+                  <option value="0">Select Sub Category</option>
+                   @foreach($sub_category as $sub_cat)
+                   <option value="{{ $sub_cat->id }}">{{ $sub_cat->name }}</option>
+                   @endforeach
+                </select>
+                @if ($errors->has('subcategory_id'))
+                    <span class="text-danger">{{ $errors->first('subcategory_id') }}</span>
+                @endif 
+                </div>
+                 <div class="form-group">
+                  <label>Brand</label>
+                <select name="brand_id" class="form-control">
+                  <option value="0">Select brand</option>
+                   @foreach($brand as $brands)
+                   <option value="{{ $brands->id }}">{{ $brands->brand_name }}</option>
+                   @endforeach
+                </select>
+                 @if ($errors->has('brand_id'))
+                    <span class="text-danger">{{ $errors->first('brand_id') }}</span>
+                @endif
+                </div>
+                <div class="form-group">
+                  <label>Product Name</label>
+                <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Enter Product Name" >
+                 @if ($errors->has('product_name'))
+                    <span class="text-danger">{{ $errors->first('product_name') }}</span>
                 @endif  
                 </div>
-              <div class="form-group">                 
-                 <label>Phone Number </label>                
-                <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">   
-                @if ($errors->has('phone'))
-                    <span class="text-danger">{{ $errors->first('phone') }}</span>
-                @endif                      
-               </div>
-               
-               <div class="form-group">                
-                 <label>Shop Address </label>                
-                <input type="text" name="shop_address" class="form-control" >  
-                @if ($errors->has('shop_address'))
-                    <span class="text-danger">{{ $errors->first('shop_address') }}</span>
-                @endif                        
-               </div>
-               <div class="form-group">                
-                 <label>Shop Branch </label>                
-                <input type="text" name="shop_branch" class="form-control" >  
-                @if ($errors->has('shop_branch'))
-                    <span class="text-danger">{{ $errors->first('shop_branch') }}</span>
-                @endif                        
-               </div>
-              
+                 <div class="form-group">
+                  <label>Product Code</label>
+                <input type="text" name="pro_code" id="pro_code" class="form-control" placeholder="Enter Product Code" >
+                 @if ($errors->has('pro_code'))
+                    <span class="text-danger">{{ $errors->first('pro_code') }}</span>
+                @endif  
+                </div>
+                <div class="form-group">
+                  <label>Price</label>
+                <input type="text" name="price" id="price" class="form-control" placeholder="Enter Price" >
+                 @if ($errors->has('price'))
+                    <span class="text-danger">{{ $errors->first('price') }}</span>
+                @endif  
+                </div>
+                 <div class="form-group">
+                  <label>Quantity</label>
+                <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter Quantity" >
+                 @if ($errors->has('quantity'))
+                    <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                @endif  
+                </div>
+                 <div class="form-group">
+                  <label>Product Color</label>
+                <input type="text" name="pro_color" id="pro_color" class="form-control" placeholder="Enter Product Color" >
+                 @if ($errors->has('pro_color'))
+                    <span class="text-danger">{{ $errors->first('pro_color') }}</span>
+                @endif  
+                </div>
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image" id="image" class="form-control" >
+                  </div>
+          <div class="form-group">
+          <label>Category Description</label>
+          <textarea name="description" class="form-control" id="category_description" cols="30" rows="10"></textarea>
+          </div>
               <div class="form-group">
               
                  <label>Status</label>
