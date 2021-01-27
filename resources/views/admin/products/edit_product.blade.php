@@ -55,14 +55,14 @@
                 </div>
                 <div class="form-group">
                   <label>Sub Category</label>
-                <select name="subcategory_id" id="subcategory" class="form-control">
+                <select name="subcategories" id="subcategory" class="form-control">
                   <option value="0">Select Sub Category</option>
                    @foreach($sub_category as $sub_cat)
                    <option value="{{ $sub_cat->id }}">{{ $sub_cat->name }}</option>
                    @endforeach
                 </select>
-                @if ($errors->has('subcategory_id'))
-                    <span class="text-danger">{{ $errors->first('subcategory_id') }}</span>
+                @if ($errors->has('subcategories'))
+                    <span class="text-danger">{{ $errors->first('subcategories') }}</span>
                 @endif 
                 </div>
                  <div class="form-group">
