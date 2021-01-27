@@ -46,11 +46,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+       
         $product = new Product();
+
         $this->validate($request,[
          'product_name'=>'required',
          'category_id'=>'required',
-         'subcategory_id'=>'required',
+         'subcategories'=>'required',
          'brand_id'=>'required',
          'pro_code'=>'required',
          'price'=>'required',
@@ -58,9 +60,10 @@ class ProductController extends Controller
          'pro_color'=>'required',
                   
          ]);
+        //dd($request);
          $product->pro_name= $request['product_name']; 
          $product->category_id= $request['category_id']; 
-         $product->subcategory_id= $request['subcategory_id']; 
+         $product->subcategory_id= $request['subcategories']; 
          $product->brand_id= $request['brand_id']; 
          $product->pro_code= $request['pro_code']; 
          $product->price= $request['price']; 
@@ -121,11 +124,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
         $this->validate($request,[
          'product_name'=>'required',
          'category_id'=>'required',
-         'subcategory_id'=>'required',
+         'subcategories'=>'required',
          'brand_id'=>'required',
          'pro_code'=>'required',
          'price'=>'required',
@@ -133,9 +135,10 @@ class ProductController extends Controller
          'pro_color'=>'required',
                   
          ]);
+        //dd($request);
          $product->pro_name= $request['product_name']; 
          $product->category_id= $request['category_id']; 
-         $product->subcategory_id= $request['subcategory_id']; 
+         $product->subcategory_id= $request['subcategories']; 
          $product->brand_id= $request['brand_id']; 
          $product->pro_code= $request['pro_code']; 
          $product->price= $request['price']; 
@@ -170,5 +173,22 @@ class ProductController extends Controller
          return redirect('/products')->with('message', 'Product deleted successfully');
 
          
+    }
+    public function get_sub_category(Request $request){
+       
+      
+        $id=$request->id;
+         //dd($id);
+
+        $data='';
+
+        $city = Category::where('parent_id','=', $id)->get();
+        //dd($city);
+        foreach($city as $citys){
+         $data.= "<option value='".$citys->id."'>$citys->name</option>";
+            
+        } 
+        echo  $data;
+
     }
 }

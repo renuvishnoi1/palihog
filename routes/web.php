@@ -36,3 +36,5 @@ Route::resource('/vehicles', App\Http\Controllers\VehicleController::class);
 Route::resource('/vehicle_types', App\Http\Controllers\VehicleTypeController::class);
 Route::resource('/pick_drop', App\Http\Controllers\PickupDropoffController::class);
 Route::resource('/shop_category', App\Http\Controllers\shop\ShopCategoryConroller::class);
+//
+Route::post('get_sub_category', [App\Http\Controllers\ProductController::class,'get_sub_category'])->name('get_sub_category');

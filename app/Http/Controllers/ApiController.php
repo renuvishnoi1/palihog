@@ -98,7 +98,7 @@ class ApiController extends Controller
         ],200);
     }
     // (14- jan)
-    public function getCategoryList(Request $request){      
+    public function getCategoryList(Request $request){     
        
        $category= Category::where(['parent_id'=>0])->get();       
         return response()->json([

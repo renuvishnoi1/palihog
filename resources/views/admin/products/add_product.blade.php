@@ -42,7 +42,7 @@
             @csrf
              <div class="form-group">
                   <label>Category</label>
-                <select name="category_id" class="form-control">
+                <select name="category_id" id="categories" class="form-control">
                   <option value="0">Select Category</option>
                    @foreach($category as $cat)
                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -52,18 +52,12 @@
                     <span class="text-danger">{{ $errors->first('category_id') }}</span>
                 @endif 
                 </div>
-                <div class="form-group">
-                  <label>Sub Category</label>
-                <select name="subcategory_id" class="form-control">
-                  <option value="0">Select Sub Category</option>
-                   @foreach($sub_category as $sub_cat)
-                   <option value="{{ $sub_cat->id }}">{{ $sub_cat->name }}</option>
-                   @endforeach
-                </select>
-                @if ($errors->has('subcategory_id'))
-                    <span class="text-danger">{{ $errors->first('subcategory_id') }}</span>
-                @endif 
-                </div>
+                 <div class="form-group">
+            <label for="">Your Subcategory</label>
+            <select class="form-control" name="subcategories" id="subcategory">
+              
+            </select>
+          </div>
                  <div class="form-group">
                   <label>Brand</label>
                 <select name="brand_id" class="form-control">
@@ -151,3 +145,28 @@
   </div>
 
 @endsection
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+$("#categories").change(function()
+{
+var category_id=$(this).val();
+//alert(category_id);
+ $.ajax({
+    type: "POST",
+    url: "{{ route('get_sub_category')}}",
+    data: { id: category_id, _token: '{{csrf_token()}}' },
+    success: function (data) {
+         $('#subcategory').html(data);
+    },
+    error: function (data, textStatus, errorThrown) {
+        console.log(data);
+
+    },
+});
+ 
+});
+});
+</script>

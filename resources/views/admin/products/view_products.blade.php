@@ -88,7 +88,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                   <th>Product Name</th>
+                   <th>Product </th>
                     <th>Code</th>                   
                     <th>Price</th>
                     <th>Status</th>                    
